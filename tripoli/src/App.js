@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 
 import Locations from "./pages/locations/Locations";
 import React from "react";
-import NotFound from "./components/Not Found/NotFound";
+import NotFound from "./pages/NotFound/NotFound";
 
 import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home/Home";
