@@ -23,26 +23,27 @@
     padding: 10px 0;
     overflow: hidden;
     max-width: 700px;
-    padding-right: 64px;
-
+    padding-right: 80px;
 }
 .navUl{
     display: flex;
-    justify-content:space-between;
+    justify-content: flex-end;
     list-style: none;
     align-items: center;
+    gap: 50px;
 }
 .navUl a, .navUlMobile a{
     text-decoration: none;
     color: #111;
     font-size: 1.1em;
+    transition: 0.2s;
 }
 .navUlMobile a{
     color: #fff;
     padding-left: 30px;
 }
 .navUl a:hover, .navUlMobile a:hover{
-    color: #496c97;
+    color: #496C97;
 }
 
 .navUlMobile > li{
@@ -52,7 +53,7 @@
 .logoContainer{
     display: flex;
     align-items: center;
-    padding-left: 64px;
+    padding-left: 80px;
 }
 
 .navUlMobile{

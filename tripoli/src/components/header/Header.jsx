@@ -54,6 +54,7 @@ export default function Header() {
         <nav className={HeaderCSS.navMainStyle}>
 
           <ul className={HeaderCSS.navUl}>
+            <li><Link to='/'>Home</Link></li>
             <li><Link to='/locations'>Locations</Link></li>
             <li><Link to='/hotels'>Hotels</Link></li>
             <li><Link to='/tours'>Tours</Link></li>
