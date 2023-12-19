@@ -2,11 +2,13 @@ import {React, useState} from "react";
 import style from './SignUp.module.css';
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import googleIcon from '../../images/google.png';
 import eye from '../../images/eye.png'
 import hide from '../../images/hide.png'
 
 function SignUp() {
+  const navigate = useNavigate()
   const [imageFile, setImageFile] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
@@ -36,21 +38,23 @@ function SignUp() {
       event.preventDefault();
     
       const formDataToSend = new FormData();
-      formDataToSend.append('Name', formData.name);
-      formDataToSend.append('Email', formData.email);
-      formDataToSend.append('Password', formData.password);
+      formDataToSend.append('name', formData.name);
+      formDataToSend.append('email', formData.email);
+      formDataToSend.append('password', formData.password);
     
       if (imageFile) {
         formDataToSend.append('image', imageFile);
       }
     
       try {
-        const response = await axios.post('http://localhost:4000/user/add', formDataToSend, {
+        const response = await axios.post('http://localhost:4000/user/register', formDataToSend, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
         });
         console.log('Response:', response.data);
+        return navigate('/', { replace: true })
+        return 
       } catch (error) {
         console.error('Error:', error);
       }
@@ -64,15 +68,15 @@ function SignUp() {
           <h1 className={style.mainTitle}>Create an account</h1>
           <p className={style.slogan}>Enter your details below</p>
         </div>
-        <form onClick={handleSubmit}>
+        <form onSubmit={handleSubmit} encType="multipart/form-data">
           <div className={style.input}>
-            <input type="text" name="Name" value={formData.name} onChange={handleInputChange} placeholder="Name *" required/>
+            <input type="text" name="name" value={formData.name} onChange={handleInputChange} placeholder="Name *" required/>
           </div>
           <div className={style.input}>
-            <input type="email" name="Email" value={formData.email} onChange={handleInputChange} placeholder="Email *" required/>
+            <input type="email" name="email" value={formData.email} onChange={handleInputChange} placeholder="Email *" required/>
           </div>
           <div className={`${style.input} ${style.passwordInput}`}>
-            <input type={showPassword ? "text" : "password"} name="Password" onChange={handleInputChange} value={formData.password} placeholder="Password *" required/>
+            <input type={showPassword ? "text" : "password"} name="password" onChange={handleInputChange} value={formData.password} placeholder="Password *" required/>
             <img
               src={showPassword ? hide : eye}
               className={style.icon}
@@ -91,7 +95,9 @@ function SignUp() {
             onChange={handleimageChange}
           />
           </div>
-          <input type="submit" value="Create Account" className={style.submitBtn} onClick={handleSubmit} />
+          <Link to={"/"}>
+            <input type="submit" onClick={handleSubmit} value="Create Account" className={style.submitBtn} />
+          </Link>
         </form>
         <div className={style.googleButton}>
           <img src={googleIcon} alt="Google Icon" className={style.googleIcon}/>
