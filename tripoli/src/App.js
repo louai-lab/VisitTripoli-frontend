@@ -16,6 +16,7 @@ import Dashboard from "./components/Dashboard/Dashboard";
 import Add from "./components/Dashboard/Add";
 import Update from "./components/Dashboard/Update";
 import ContainerOfThePage from "./components/ContainerOfThePage/ContainerOfThePage";
+import SignUp from "./pages/SignUp/SignUp";
 
 function App() {
   let [tourApi, setTourApi] = useState([]);
@@ -82,6 +83,7 @@ function App() {
       <Route path="/admin/tours/update/:id" element={<Update />} />
       <Route path="/admin/tours/add" element={<Add />} />
       <Route path="/*" element={<NotFound />} />
+      <Route path="/signup" element={<SignUp />} />
     </Routes>
   );
 }
