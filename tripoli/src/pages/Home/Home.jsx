@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import styles from "./Home.module.css";
 import HeroImage from "../../components/heroImage/HeroImage";
 import About from "../../components/aboutComponent/About";
@@ -7,8 +7,14 @@ import testImage from "../../components/heroImage/tripoli.jpg";
 import TourCard from "../../components/TourCard/TourCard";
 import { Link } from "react-router-dom";
 import HotelContainer from "../../components/HotelCard/HotelContainer";
+import UserContext from "../../useContext/userContext";
 
 function Home({ api, tourApi, hotelapi }) {
+
+  const {user, setUser} = useContext(UserContext)
+
+  console.log(user)
+
   let newApi = hotelapi.slice(0, 3);
   return (
     <>

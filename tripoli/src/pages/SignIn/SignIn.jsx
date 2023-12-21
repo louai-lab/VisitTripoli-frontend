@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React, useContext, useState } from "react";
 import style from "./SignIn.module.css";
 // import style from '../SignUp/SignUp.module.css'
 import { Link } from "react-router-dom";
@@ -8,16 +8,13 @@ import googleIcon from "../../images/google.png";
 import eye from "../../images/eye.png";
 import hide from "../../images/hide.png";
 import { toast, ToastContainer } from "react-toastify";
+import UserContext from "../../useContext/userContext";
 
 function SignIn() {
+  const { user , setUser } = useContext(UserContext)
   const navigate = useNavigate();
   const [imageFile, setImageFile] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
-  // const [formData, setFormData] = useState({
-  //   name: '',
-  //   email: '',
-  //   password: '',
-  // });
   const [credentials, setCredentials] = useState({
     email: "",
     password: "",
@@ -36,31 +33,6 @@ function SignIn() {
     });
   };
 
-  // const handleSubmit = async (event) => {
-  //   event.preventDefault();
-
-  //   const formDataToSend = new FormData();
-  //   formDataToSend.append('name', formData.name);
-  //   formDataToSend.append('email', formData.email);
-  //   formDataToSend.append('password', formData.password);
-
-  //   if (imageFile) {
-  //     formDataToSend.append('image', imageFile);
-  //   }
-
-  //   try {
-  //     const response = await axios.post('http://localhost:4000/user/register', formDataToSend, {
-  //       headers: {
-  //         'Content-Type': 'multipart/form-data',
-  //       },
-  //     });
-  //     console.log('Response:', response.data);
-  //     return navigate('/', { replace: true })
-  //   } catch (error) {
-  //     console.error('Error:', error);
-  //   }
-  // };
-
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -75,7 +47,8 @@ function SignIn() {
       );
 
       if (response.data) {
-        console.log(response.data);
+        // console.log(response.data);
+        setUser(response.data)
 
         // Save user data to local storage
         localStorage.setItem("userData", JSON.stringify(true));

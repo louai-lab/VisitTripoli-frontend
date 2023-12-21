@@ -1,6 +1,7 @@
 import "./App.css";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import UserContext from "./useContext/userContext";
 
 import Locations from "./pages/locations/Locations";
 import React from "react";
@@ -20,6 +21,7 @@ import SignUp from "./pages/SignUp/SignUp";
 import SignIn from "./pages/SignIn/SignIn";
 
 function App() {
+  const [user, setUser] = useState(null);
   let [tourApi, setTourApi] = useState([]);
   let [locationApi, setLocationApi] = useState([]);
   let [hotels, setHotels] = useState([]);
@@ -60,33 +62,38 @@ function App() {
     fetchHotels();
   }, []);
   return (
-    <Routes>
-      <Route path="/" element={<ContainerOfThePage />}>
-        <Route
-          index
-          path="/"
-          element={
-            <Home api={locationApi} tourApi={tourApi} hotelapi={hotels} />
-          }
-        />
-        <Route path="tours" element={<Tour api={tourApi} />} />
-        <Route
-          path="hotels"
-          element={<Hotel hotelapi={hotels} home="false" />}
-        />
-        <Route path="locations" element={<AllLocations api={locationApi} />} />
-        <Route
-          path="/Location/:id"
-          element={<Locations element={locationApi} />}
-        />
-      </Route>
-      <Route path="/admin/tours" element={<Dashboard />} />
-      <Route path="/admin/tours/update/:id" element={<Update />} />
-      <Route path="/admin/tours/add" element={<Add />} />
-      <Route path="/*" element={<NotFound />} />
-      <Route path="/signup" element={<SignUp />} />
-      <Route path="/signin" element={<SignIn />} />
-    </Routes>
+    <UserContext.Provider value={{user,setUser}}>
+      <Routes>
+        <Route path="/" element={<ContainerOfThePage />}>
+          <Route
+            index
+            path="/"
+            element={
+              <Home api={locationApi} tourApi={tourApi} hotelapi={hotels} />
+            }
+          />
+          <Route path="tours" element={<Tour api={tourApi} />} />
+          <Route
+            path="hotels"
+            element={<Hotel hotelapi={hotels} home="false" />}
+          />
+          <Route
+            path="locations"
+            element={<AllLocations api={locationApi} />}
+          />
+          <Route
+            path="/Location/:id"
+            element={<Locations element={locationApi} />}
+          />
+        </Route>
+        <Route path="/admin/tours" element={<Dashboard />} />
+        <Route path="/admin/tours/update/:id" element={<Update />} />
+        <Route path="/admin/tours/add" element={<Add />} />
+        <Route path="/*" element={<NotFound />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/signin" element={<SignIn />} />
+      </Routes>
+    </UserContext.Provider>
   );
 }
 
