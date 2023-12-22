@@ -1,11 +1,17 @@
-import React, { useState } from "react";
+import React, { useState , useContext } from "react";
 import Button from "../../components/buttonLocation/Button";
 import HeroImage from "../../components/heroImage/HeroImage";
 import heroTestImage from "../../components/heroImage/tripoli.jpg";
 import ContainerLocation from "../../components/containerLocation/ContainerLocation";
+import UserContext from "../../useContext/userContext";
 
 export default function AllLocations(props) {
   const [whichButtonClicked, setWhichButtonClicked] = useState("");
+
+  const { user } = useContext(UserContext);
+
+  // console.log(user)
+  
 
   const api = props.api;
   let idOne = [];
@@ -15,6 +21,8 @@ export default function AllLocations(props) {
   let idOneAll = [];
   let idTwoAll = [];
   let idThreeAll = [];
+
+  
 
   const map = api.map((element) => {
     if (element.id == 1) {

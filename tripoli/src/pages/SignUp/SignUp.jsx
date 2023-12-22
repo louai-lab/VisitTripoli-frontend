@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React, useState , useContext } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import style from "./SignUp.module.css";
 import { Link } from "react-router-dom";
@@ -7,10 +7,12 @@ import { useNavigate } from "react-router-dom";
 import googleIcon from "../../images/google.png";
 import eye from "../../images/eye.png";
 import hide from "../../images/hide.png";
+import UserContext from "../../useContext/userContext";
 
 import "react-toastify/dist/ReactToastify.css";
 
 function SignUp() {
+  const { user , setUser } = useContext(UserContext)
   const navigate = useNavigate();
   const [imageFile, setImageFile] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
@@ -62,12 +64,13 @@ function SignUp() {
         },
       })
       .then((response) => {
+        setUser(response.data)
         toast.success("Signup successful!");
 
         
         setTimeout(() => {
           navigate("/home", { replace: true });
-        }, 5000);
+        }, 3000);
       })
       .catch((error) => {
         console.error("Error:", error);
