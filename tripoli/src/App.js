@@ -19,6 +19,8 @@ import Update from "./components/Dashboard/Update";
 import ContainerOfThePage from "./components/ContainerOfThePage/ContainerOfThePage";
 import SignUp from "./pages/SignUp/SignUp";
 import SignIn from "./pages/SignIn/SignIn";
+import DashboardPages from "./pages/NewDashbaord/NewDashboard";
+import { Test } from "./pages/TestPage/test";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -112,6 +114,8 @@ function App() {
         <Route path="/admin/tours/update/:id" element={<Update />} />
         <Route path="/admin/tours/add" element={<Add />} />
         <Route path="/*" element={<NotFound />} />
+        <Route path="/dashboard" element={<DashboardPages />}/>
+        <Route path="/dashboard/test" element={<DashboardPages> <Test /> </DashboardPages>}/>
       </Routes>
     </UserContext.Provider>
   );
