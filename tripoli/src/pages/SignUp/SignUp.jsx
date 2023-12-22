@@ -66,7 +66,7 @@ function SignUp() {
 
         
         setTimeout(() => {
-          navigate("/", { replace: true });
+          navigate("/home", { replace: true });
         }, 5000);
       })
       .catch((error) => {

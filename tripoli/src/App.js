@@ -2,7 +2,7 @@ import "./App.css";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import UserContext from "./useContext/userContext";
-
+import { Navigate } from "react-router-dom";
 import Locations from "./pages/locations/Locations";
 import React from "react";
 import NotFound from "./components/Not Found/NotFound";
@@ -25,6 +25,7 @@ function App() {
   let [tourApi, setTourApi] = useState([]);
   let [locationApi, setLocationApi] = useState([]);
   let [hotels, setHotels] = useState([]);
+  axios.defaults.withCredentials = true
 
   useEffect(() => {
     async function fetchTours() {
@@ -60,14 +61,35 @@ function App() {
       }
     }
     fetchHotels();
+
+    async function fetchUser(){
+    if(!user){
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_BACKEND}/user/oneuser`
+        );
+        setUser(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  }
+  fetchUser()
+
+
+
   }, []);
   return (
-    <UserContext.Provider value={{user,setUser}}>
+    <UserContext.Provider value={{ user, setUser }}>
       <Routes>
-        <Route path="/" element={<ContainerOfThePage />}>
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/signin" element={<SignIn />} />
+
+        <Route path="/" element={<Navigate to="/signin" replace />} />
+
+        <Route path="/home" element={<ContainerOfThePage />}>
           <Route
             index
-            path="/"
             element={
               <Home api={locationApi} tourApi={tourApi} hotelapi={hotels} />
             }
@@ -82,7 +104,7 @@ function App() {
             element={<AllLocations api={locationApi} />}
           />
           <Route
-            path="/Location/:id"
+            path="Location/:id"
             element={<Locations element={locationApi} />}
           />
         </Route>
@@ -90,8 +112,6 @@ function App() {
         <Route path="/admin/tours/update/:id" element={<Update />} />
         <Route path="/admin/tours/add" element={<Add />} />
         <Route path="/*" element={<NotFound />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/signin" element={<SignIn />} />
       </Routes>
     </UserContext.Provider>
   );

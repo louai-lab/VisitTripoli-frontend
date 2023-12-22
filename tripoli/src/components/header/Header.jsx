@@ -49,22 +49,22 @@ export default function Header() {
       <div className={HeaderCSS.containerHeader}>
 
         <div className={HeaderCSS.logoContainer}>
-          <Link to='/'>{smallLogo ?<Logo size="small"/> : <Logo /> }</Link>
+          <Link to='/home'>{smallLogo ?<Logo size="small"/> : <Logo /> }</Link>
         </div>
         <nav className={HeaderCSS.navMainStyle}>
 
           <ul className={HeaderCSS.navUl}>
-            <li><Link to='/locations'>Locations</Link></li>
-            <li><Link to='/hotels'>Hotels</Link></li>
-            <li><Link to='/tours'>Tours</Link></li>
-            <li onMouseEnter={handleMapIcon} onMouseLeave={handleMapIcon}><a href="/#map"><MapIcon place="header" hovered={mapHovered}></MapIcon></a></li>
+            <li><Link to='/home/locations'>Locations</Link></li>
+            <li><Link to='/home/hotels'>Hotels</Link></li>
+            <li><Link to='/home/tours'>Tours</Link></li>
+            <li onMouseEnter={handleMapIcon} onMouseLeave={handleMapIcon}><a href="/home/#map"><MapIcon place="header" hovered={mapHovered}></MapIcon></a></li>
           </ul>
 
            <ul className={toggleClasses}>
-            <li><Link to='/locations'>Locations</Link></li>
-            <li><Link to='/hotels'>Hotels</Link></li>
-            <li><Link to='/tours'>Tours</Link></li>
-            <li><Link to='/tours'>Top Attractions</Link></li>
+            <li><Link to='/home/locations'>Locations</Link></li>
+            <li><Link to='/home/hotels'>Hotels</Link></li>
+            <li><Link to='/home/tours'>Tours</Link></li>
+            <li><Link to='/home/tours'>Top Attractions</Link></li>
           </ul>
 
           <div className={HeaderCSS.burgerButton} onClick={() => setCollapsed(!collapsed)}>

@@ -54,16 +54,16 @@ function SignIn() {
         localStorage.setItem("userData", JSON.stringify(true));
         toast.success("Login successfully")
         setTimeout(() => {
-          navigate("/", { replace: true });
-        }, 5000);
+          navigate("/home", { replace: true });
+        }, 3000);
       }
       
     } catch (error) {
-      if (error.response.status === 401) {
-        toast.error("Incorrect email or password");
-      } else {
-        toast.error("An error occurred. Please try again.");
-      }
+      // if (error.response.status === 401) {
+      //   toast.error("Incorrect email or password");
+      // } else {
+      //   toast.error("An error occurred. Please try again.");
+      // }
       console.log(error);
     }
   };
