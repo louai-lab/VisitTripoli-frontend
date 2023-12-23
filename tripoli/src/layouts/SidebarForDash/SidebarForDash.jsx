@@ -14,7 +14,7 @@ function SidebarForDash() {
       </div>
       <ul className={Styles.sidebarList}>
           <div className={Styles.firstDiv}>
-          <Link to="dashboard/locations">
+          <Link to="/dashboard/locations">
         <li className={Styles.sidebarListItem}>
             All Locations
             </li>
@@ -29,9 +29,9 @@ function SidebarForDash() {
             All Hotels
         </li>
         </Link>
-        <Link to="dashboard/guests">
+        <Link to="/dashboard/users">
         <li className={Styles.sidebarListItem}>
-            All Guests
+            All Users
             </li>
           </Link>
           </div>
