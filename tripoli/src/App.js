@@ -1,4 +1,5 @@
 import "./App.css";
+import "rsuite/dist/rsuite.min.css";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import UserContext from "./useContext/userContext";

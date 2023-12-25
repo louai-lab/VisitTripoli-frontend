@@ -14,6 +14,7 @@ import "./DashboardUsers.css";
 import DeleteIcon from "@mui/icons-material/DeleteOutline";
 import UpdateIcon from "@mui/icons-material/UpdateSharp";
 import { CircularProgress } from "@mui/material";
+import RowUser from "./RowUser.jsx";
 
 const columns = [
   { id: "id", label: "ID", minWidth: 10 },
@@ -33,10 +34,6 @@ const columns = [
   //     align: "center",
   //   },
 ];
-
-const handleUpdate = () => {};
-
-const handleDelete = () => {};
 
 // function createData(id, image, name, role, email) {
 //   return { id, image, name, role, email };
@@ -61,7 +58,10 @@ const handleDelete = () => {};
 export default function DashboardUsers() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
-  const [isLoading , setIsLoading]=useState(true)
+  const [isLoading, setIsLoading] = useState(true);
+  const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
+  const [userData, setUserData] = useState(null);
+
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -82,7 +82,7 @@ export default function DashboardUsers() {
         const users = response.data;
         // console.log(users)
         setData(users);
-        setIsLoading(false)
+        setIsLoading(false);
       } catch (error) {
         console.log(error);
       }
@@ -95,99 +95,130 @@ export default function DashboardUsers() {
     return `http://localhost:4000/images/${image}`;
   };
 
-  const handleUpdate = (id) => {
-    console.log(id);
+  const handleEdit = (rowId) => {
+    console.log(rowId);
+    setIsProfileModalOpen(true)
+    const selectedRowData = data.find((row) => row.id === rowId)
+
+    setUserData(selectedRowData)
   };
 
+  
+
+  const handleDelete = () => {};
+
   return (
-    <div >
+    <div>
       {isLoading ? (
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100vh' }}>
-            <CircularProgress style={{ margin: '0 auto' }}/>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            height: "100vh",
+          }}
+        >
+          <CircularProgress style={{ margin: "0 auto" }} />
         </div>
       ) : (
-        <div>
-          <h1 style={{ color: "#314865" }}>Users</h1>
+        <>
+          {isProfileModalOpen && (
+            <RowUser userData={userData} isProfileModalOpen={isProfileModalOpen} setIsProfileModalOpen={setIsProfileModalOpen} closeHandler={()=> setIsProfileModalOpen(false)}/>
+          )}
           <div>
-            <Paper sx={{ width: "100%", overflow: "hidden" }}>
-              <TableContainer sx={{ maxHeight: 440 }}>
-                <Table stickyHeader aria-label="sticky table">
-                  <TableHead>
-                    <TableRow>
-                      {columns.map((column) => (
-                        <TableCell
-                          key={column.id}
-                          align={column.align}
-                          style={{ minWidth: column.minWidth }}
-                        >
-                          {column.label}
-                        </TableCell>
-                      ))}
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {data
-                      .slice(
-                        page * rowsPerPage,
-                        page * rowsPerPage + rowsPerPage
-                      )
-                      .map((row) => {
-                        return (
-                          <TableRow
-                            hover
-                            role="checkbox"
-                            tabIndex={-1}
-                            key={row.code}
+            <h1 style={{ color: "#314865" }}>Users</h1>
+            <div>
+              <Paper sx={{ width: "100%", overflow: "hidden" }}>
+                <TableContainer sx={{ maxHeight: 800 }}>
+                  <Table stickyHeader aria-label="sticky table">
+                    <TableHead>
+                      <TableRow>
+                        {columns.map((column) => (
+                          <TableCell
+                            key={column.id}
+                            align={column.align}
+                            style={{
+                              color: "white",
+                              minWidth: column.minWidth,
+                              backgroundColor:
+                                column.id === "id" ? "#BB9463" : "#314865",
+                            }}
                           >
-                            {columns.map((column) => {
-                              const value =
-                                column.id === "image" ? (
-                                  <img src={getImageUrl(row[column.id])} alt=""/>
-                                ) : (
-                                  row[column.id]
+                            {column.label}
+                          </TableCell>
+                        ))}
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {data
+                        .slice(
+                          page * rowsPerPage,
+                          page * rowsPerPage + rowsPerPage
+                        )
+                        .map((row) => {
+                          return (
+                            <TableRow
+                              hover
+                              role="checkbox"
+                              tabIndex={-1}
+                              key={row.code}
+                            >
+                              {columns.map((column) => {
+                                const value =
+                                  column.id === "image" ? (
+                                    <img
+                                      src={getImageUrl(row[column.id])}
+                                      alt=""
+                                    />
+                                  ) : (
+                                    row[column.id]
+                                  );
+                                return (
+                                  <TableCell
+                                    key={column.id}
+                                    align={column.align}
+                                  >
+                                    {column.format && typeof value === "number"
+                                      ? column.format(value)
+                                      : value}
+                                  </TableCell>
                                 );
-                              return (
-                                <TableCell key={column.id} align={column.align}>
-                                  {column.format && typeof value === "number"
-                                    ? column.format(value)
-                                    : value}
-                                </TableCell>
-                              );
-                            })}
-                            <TableCell align="center">
-                              <button
-                                onClick={() => handleUpdate(row.id)}
-                                color="primary"
-                                style={{ border: "none", margin: "5px" }}
-                              >
-                                <UpdateIcon style={{ color: "green" }} />
-                              </button>
-                              <button
-                                onClick={() => handleDelete()}
-                                color="secondary"
-                                style={{ border: "none" }}
-                              >
-                                <DeleteIcon style={{ color: "red" }} />
-                              </button>
-                            </TableCell>
-                          </TableRow>
-                        );
-                      })}
-                  </TableBody>
-                </Table>
-              </TableContainer>
-              <TablePagination
-                rowsPerPageOptions={[10, 25, 100]}
-                component="div"
-                count={data.length}
-                rowsPerPage={rowsPerPage}
-                page={page}
-                onPageChange={handleChangePage}
-                onRowsPerPageChange={handleChangeRowsPerPage}
-              />
-            </Paper>
+                              })}
+                              <TableCell align="center">
+                                <button
+                                  onClick={() => handleEdit(row.id)}
+                                  color="primary"
+                                  style={{ border: "none", margin: "5px" }}
+                                >
+                                  <UpdateIcon style={{ color: "green" }} />
+                                </button>
+                                <button
+                                  onClick={() => handleDelete()}
+                                  color="secondary"
+                                  style={{ border: "none" }}
+                                >
+                                  <DeleteIcon style={{ color: "red" }} />
+                                </button>
+                              </TableCell>
+                            </TableRow>
+                          );
+                        })}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+                <TablePagination
+                  rowsPerPageOptions={[10, 25, 100]}
+                  component="div"
+                  count={data.length}
+                  rowsPerPage={rowsPerPage}
+                  page={page}
+                  onPageChange={handleChangePage}
+                  onRowsPerPageChange={handleChangeRowsPerPage}
+                />
+              </Paper>
+            </div>
           </div>
-        </div>
+        </>
       )}
     </div>
   );

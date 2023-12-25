@@ -10,7 +10,7 @@ export default function AllLocations(props) {
 
   const { user } = useContext(UserContext);
 
-  // console.log(user)
+  console.log(user)
   
 
   const api = props.api;
