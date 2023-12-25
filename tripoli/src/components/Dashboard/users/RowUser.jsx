@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useState , useEffect } from "react";
 import { Form, ButtonToolbar, Button, Input } from "rsuite";
 import { SelectPicker } from "rsuite";
 import { toast, ToastContainer } from "react-toastify";
@@ -12,12 +12,17 @@ const getImageUrl = (image) => {
   return `http://localhost:4000/images/${image}`;
 };
 
-const RowUser = ({ closeHandler, isProfileModalOpen , setIsProfileModalOpen , userData }) => {
-    
+const RowUser = ({
+  closeHandler,
+  isProfileModalOpen,
+  setIsProfileModalOpen,
+  userData,
+  setUserData,
+}) => {
   const [formData, setFormData] = useState({
     name: userData.name || "",
     email: userData.email || "",
-    password: "",
+    // password: "",
     role: userData.role || "",
     image: userData.image || "",
   });
@@ -50,17 +55,27 @@ const RowUser = ({ closeHandler, isProfileModalOpen , setIsProfileModalOpen , us
         `${process.env.REACT_APP_BACKEND}/user/update/${userData.id}`,
         formDataToSend
       );
+      
+
       console.log("Update successful", response.data);
       toast.success("Update succsessfully");
-      
+
+      const updatedUserData = response.data;
+
+      // Update the state to reflect the changes
+      setUserData(updatedUserData);
     } catch (error) {
       console.log(error);
-      toast.error("Update failed")
-    }
-    finally{
-        setIsProfileModalOpen(false)
+      toast.error("Update failed");
+    } finally {
+      setTimeout(() => {
+        setIsProfileModalOpen(false);
+      }, 3000);
     }
   };
+
+ 
+
 
   return (
     <>
@@ -105,15 +120,17 @@ const RowUser = ({ closeHandler, isProfileModalOpen , setIsProfileModalOpen , us
             />
             {/* <Form.HelpText tooltip>Email is required</Form.HelpText> */}
           </Form.Group>
-          <Form.Group controlId="password">
+          {/* <Form.Group controlId="password">
             <Form.ControlLabel>Password</Form.ControlLabel>
             <Form.Control
               name="password"
               type="password"
+              defaultValue={formData.password}
+              onChange={(value) => handleInputChange("password", value)}
               autoComplete="off"
               required={false}
             />
-          </Form.Group>
+          </Form.Group> */}
 
           <Form.Group>
             <SelectPicker

@@ -15,6 +15,10 @@ import DeleteIcon from "@mui/icons-material/DeleteOutline";
 import UpdateIcon from "@mui/icons-material/UpdateSharp";
 import { CircularProgress } from "@mui/material";
 import RowUser from "./RowUser.jsx";
+import { Button, ButtonToolbar } from "rsuite";
+import FormAdd from "./FormAdd.jsx";
+import DeleteConfirmationDialog from "./DeleteConfirmationModal.jsx";
+import { ToastContainer , toast } from 'react-toastify';
 
 const columns = [
   { id: "id", label: "ID", minWidth: 10 },
@@ -27,41 +31,17 @@ const columns = [
     minWidth: 10,
     align: "center",
   },
-  //   {
-  //     id: "actions",
-  //     label: "Actions",
-  //     minWidth: 100,
-  //     align: "center",
-  //   },
 ];
-
-// function createData(id, image, name, role, email) {
-//   return { id, image, name, role, email };
-// }
-
-// const rows = [
-//   createData(1, "", "Louai", "Admin", "louai@gmail.com"),
-//   createData(2, "", "Ahmad", "Admin", "louai@gmail.com"),
-//   createData(3, "", "Samir", "Guide", "louai@gmail.com"),
-//   createData(4, "", "Taysir", "Guide", "louai@gmail.com"),
-//   createData(5, "", "Kamal", "Admin", "louai@gmail.com"),
-//   createData(6, "", "Fouad", "Guide", "louai@gmail.com"),
-//   createData(7, "", "Yahya", "Guide", "louai@gmail.com"),
-//   createData(8, "", "Abed", "Admin", "louai@gmail.com"),
-//   createData(9, "", "Taysir", "Guide", "louai@gmail.com"),
-//   createData(10, "", "Kamal", "Admin", "louai@gmail.com"),
-//   createData(11, "", "Fouad", "Guide", "louai@gmail.com"),
-//   createData(12, "", "Yahya", "Guide", "louai@gmail.com"),
-//   createData(13, "", "Abed", "Admin", "louai@gmail.com"),
-// ];
 
 export default function DashboardUsers() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [isLoading, setIsLoading] = useState(true);
   const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
+  const [isFormAdd, setIsFormAdd] = useState(false);
   const [userData, setUserData] = useState(null);
-
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [userDataToDelete, setUserDataToDelete] = useState(null);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -90,25 +70,87 @@ export default function DashboardUsers() {
     fetchData();
   }, []);
 
+
+  // for showing the image
   const getImageUrl = (image) => {
     // Assuming the base URL is http://localhost:4000/images
     return `http://localhost:4000/images/${image}`;
   };
 
+
+  // Edit a user
   const handleEdit = (rowId) => {
     console.log(rowId);
-    setIsProfileModalOpen(true)
-    const selectedRowData = data.find((row) => row.id === rowId)
-
-    setUserData(selectedRowData)
+    setIsProfileModalOpen(true);
+    const selectedRowData = data.find((row) => row.id === rowId);
+    setUserData(selectedRowData);
   };
 
-  
 
-  const handleDelete = () => {};
+  // Confirmation the Delete
+  const confirmDelete = async () => {
+    try {
+      await axios.delete(`${process.env.REACT_APP_BACKEND}/user/delete/${userDataToDelete.id}`);
+      setData((prevData) => prevData.filter((row) => row.id !== userDataToDelete.id));
+      toast.success('User deleted successfully');
+      setIsDeleteModalOpen(false);
+    } catch (error) {
+      console.error('Error deleting user:', error);
+      toast.error('Error deleting user');
+      setIsDeleteModalOpen(false);
+    }
+  };
+
+  // when click on deleteIcon to open a popUp
+  const handleDelete = (rowId) => {
+    const selectedRowData = data.find((row) => row.id === rowId);
+    setUserDataToDelete(selectedRowData);
+    setIsDeleteModalOpen(true);
+  };
+
+  // when click on add user , to open a form
+  const openAddForm = () => {
+    setIsFormAdd(true);
+  };
+
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    role: "",
+    image: null,
+  });
+
+  // Add A new user
+  const handleAdd = async (event) => {
+   try{
+    const formDataToSend = new FormData();
+    Object.entries(formData).forEach(([key,value]) =>{
+        formDataToSend.append(key,value);
+    })
+
+    const response = await axios.post(`${process.env.REACT_APP_BACKEND}/user/register`, formDataToSend)
+    toast.success('User added successfully');
+    console.log(response.data)
+    setData((prevData) => [...prevData, response.data]);
+    setFormData({
+        name: '',
+        email: '',
+        password: '',
+        role: '',
+        image: null,
+      });
+      setIsFormAdd(false);
+   }
+   catch(error){
+    console.log(error)
+    toast.error('Error adding user');
+   }
+  };
 
   return (
     <div>
+      <ToastContainer/>
       {isLoading ? (
         <div
           style={{
@@ -123,10 +165,56 @@ export default function DashboardUsers() {
       ) : (
         <>
           {isProfileModalOpen && (
-            <RowUser userData={userData} isProfileModalOpen={isProfileModalOpen} setIsProfileModalOpen={setIsProfileModalOpen} closeHandler={()=> setIsProfileModalOpen(false)}/>
+            <RowUser
+              userData={userData}
+              setUserData={setUserData}
+              isProfileModalOpen={isProfileModalOpen}
+              setIsProfileModalOpen={setIsProfileModalOpen}
+              closeHandler={() => setIsProfileModalOpen(false)}
+            />
           )}
+
+          {isFormAdd && (
+            <FormAdd
+              closeHandler={() => setIsFormAdd(false)}
+              handleAdd={handleAdd}
+              formData={formData}
+              setFormData={setFormData}
+              isFormAdd={isFormAdd}
+              setIsFormAdd={setIsFormAdd}
+            />
+          )}
+
+          {isDeleteModalOpen && (
+            <DeleteConfirmationDialog
+              isOpen={isDeleteModalOpen}
+              onCancel={() => setIsDeleteModalOpen(false)}
+              onConfirm={confirmDelete}
+            />
+          )}
+
           <div>
-            <h1 style={{ color: "#314865" }}>Users</h1>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                margin: "10px",
+              }}
+            >
+              <h1 style={{ color: "#314865" }}>Users</h1>
+              <ButtonToolbar>
+                <Button
+                  onClick={openAddForm}
+                  appearance="primary"
+                  style={{ backgroundColor: "#BB9463" }}
+                >
+                  <span style={{ marginRight: "5px", fontWeight: "bold" }}>
+                    +{" "}
+                  </span>{" "}
+                  Add User
+                </Button>
+              </ButtonToolbar>
+            </div>
             <div>
               <Paper sx={{ width: "100%", overflow: "hidden" }}>
                 <TableContainer sx={{ maxHeight: 800 }}>
@@ -192,8 +280,9 @@ export default function DashboardUsers() {
                                 >
                                   <UpdateIcon style={{ color: "green" }} />
                                 </button>
+                                
                                 <button
-                                  onClick={() => handleDelete()}
+                                  onClick={() => handleDelete(row.id)}
                                   color="secondary"
                                   style={{ border: "none" }}
                                 >

@@ -58,7 +58,7 @@ function SignUp() {
     }
 
     axios
-      .post("http://localhost:4000/user/register", formDataToSend, {
+      .post(`${process.env.REACT_APP_BACKEND}/user/register`, formDataToSend, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
