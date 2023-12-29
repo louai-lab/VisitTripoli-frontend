@@ -1,0 +1,118 @@
+.inputWrapper {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 7px;
+  border: 1px solid #314865;
+  outline: 1.5px solid #314865;
+  margin: auto;
+}
+.loginInput {
+  color: #BB9463;
+  background-color: var(--secondary-bg-clr);
+  padding: 10px;
+  border-radius: 7px;
+  outline: none;
+  border: 1px solid white;
+  transition: border-color 0.25s ease, outline 0.15s ease;
+}
+/* .loginInput:hover {
+  border: 0.1px solid var(--light-gold-clr);
+} */
+/* .loginInput:focus {
+  border: 1px solid none;
+  outline: 2px solid #314865;
+} */
+.loginInputLable {
+  color: #BB9463;
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  transform: translate(0, 0) scale(1);
+  transform-origin: top left;
+  transition: all 0.3s, font-size 0.3s;
+  pointer-events: none;
+}
+.inputWrapper:focus-within .loginInputLable {
+  transform: translateY(-102%) scale(0.9);
+  background-color: var(--secondary-bg-clr);
+  color: #BB9463;
+}
+
+.inputActive {
+  transform: translateY(-95%) scale(0.9);
+  background-color: var(--secondary-bg-clr);
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  color: white;
+  background-color: var(--secondary-bg-clr);
+  padding: 10px;
+  border-radius: 7px;
+  outline: none;
+  border: 1px solid white;
+  transition: border-color 0.25s ease, outline 0.15s ease;
+}
+.inputWrapper {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.textarea {
+  color: white;
+  background-color: var(--secondary-bg-clr);
+  padding: 10px;
+  border-radius: 7px;
+  outline: none;
+  border: 1px solid white;
+  transition: border-color 0.25s ease, outline 0.15s ease;
+}
+.textarea:hover {
+  border: 0.1px solid var(--light-gold-clr);
+}
+.textarea:focus {
+  border: 1px solid var(--light-gold-clr);
+  outline: 2px solid var(--light-gold-clr);
+}
+.textareaLabel {
+  position: absolute;
+  left: 10px;
+  transform: translate(0, 0) scale(1);
+  transform-origin: top left;
+  transition: all 0.3s, font-size 0.3s;
+  pointer-events: none;
+}
+.inputWrapper:focus-within .textareaLabel {
+  transform: translateY(-255%) scale(0.9);
+  background-color: var(--secondary-bg-clr);
+  color: var(--light-gold-clr);
+}
+
+.textareActive {
+  transform: translateY(-250%) scale(0.9);
+  background-color: var(--secondary-bg-clr);
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  color: white;
+  background-color: var(--secondary-bg-clr);
+  padding: 10px;
+  border-radius: 7px;
+  outline: none;
+  border: 1px solid white;
+  transition: border-color 0.25s ease, outline 0.15s ease;
+}
+
+
+@media screen and (max-width: 750px){
+  .inputWrapper {
+    width: 100%;
+  }
+}
+

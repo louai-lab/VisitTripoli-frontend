@@ -1,0 +1,7 @@
+.custom-input:focus{
+    border-color: var(--light-gold-clr) !important
+  }
+  
+  .custom-input:hover{
+      border-color: var(--light-gold-clr) !important
+  }
