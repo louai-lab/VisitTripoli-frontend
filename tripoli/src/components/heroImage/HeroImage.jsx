@@ -52,7 +52,6 @@ export default function HeroImage(props) {
     height: "100vh",
   };
 
-  // const title = props.title | "test title";
   let title = props.mytitle;
 
   const el = React.useRef(null);

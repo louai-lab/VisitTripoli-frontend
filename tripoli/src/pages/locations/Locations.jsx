@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import LocationCSS from "./Locations.module.css";
-import Header from "../../components/header/Header";
+import Header from "../../layouts/header/Header";
 import HeroImage from "../../components/heroImage/HeroImage";
 import homePageImage from "../../components/heroImage/tripoli.jpg";
 import Car from "../../components/SVGComponents/Car";

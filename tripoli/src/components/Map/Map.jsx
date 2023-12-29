@@ -43,9 +43,8 @@ const Map = ({ api }) => {
             <img
               key={element.title}
               src={`${process.env.REACT_APP_BACKEND}/${element.heroImage}`}
-              className={`${
-                styles[element.title.split(" ")[0].toLowerCase()]
-              } ${styles.first} }}`}
+              className={`${styles[element.title.split(" ")[0].toLowerCase()]
+                } ${styles.first} }}`}
               alt="map"
               onClick={() => {
                 setSource(element.heroImage);

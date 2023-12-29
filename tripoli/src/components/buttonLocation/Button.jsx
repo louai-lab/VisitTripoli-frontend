@@ -107,7 +107,6 @@ const Button = ({ buttonPressed }) => {
           <span>Places of Worship</span>
         </div>
       </div>
-      {/* <ContainerLocation /> */}
     </div>
   );
 };

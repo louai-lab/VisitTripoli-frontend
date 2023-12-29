@@ -1,31 +1,32 @@
 .RowDisplay {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    align-items: center;
-    margin-top: 3rem;
-  }
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-top: 3rem;
+}
 
-  .RowReverseDispllay {
-    display: flex;
-    flex-direction: row-reverse;
-    justify-content: space-evenly;
-    align-items: center;
-    margin-top: 3rem;
-    margin-bottom: 3rem;
-  }
+.RowReverseDisplay {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
 
 .aboutImage {
   width: 25%;
 }
 
-.paragAbout, .title {
+.paragAbout,
+.title {
   color: #314865;
 }
 
-.title{
+.title {
   font-size: 55px;
-  font-weight:600;
+  font-weight: 600;
 }
 
 .paragAbout {
@@ -35,45 +36,52 @@
   letter-spacing: 0.8px;
   font-weight: 200;
 }
+
 .line {
   border: 1px solid #D1D1D1;
   margin-top: 3rem;
   width: 70%;
 }
-.remove{
+
+.remove {
   display: none;
 }
 
 
-@media (max-width: 1000px)  {
+@media (max-width: 1000px) {
 
   .RowDisplay {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-  align-items: center;
+    align-items: center;
     margin-top: 1rem;
   }
+
   .aboutImage {
     width: 100%;
   }
+
   .title {
     font-size: 1.7rem;
     font-weight: 500;
     margin: 10px;
   }
+
   .paragAbout {
-      width: 93%;
-      font-size: 20px;
-      font-family: Montagu Slab;
-      letter-spacing: 0.8px;
-      font-weight: 200;
-      margin-left: 10px;
+    width: 93%;
+    font-size: 20px;
+    font-family: Montagu Slab;
+    letter-spacing: 0.8px;
+    font-weight: 200;
+    margin-left: 10px;
   }
-  .RowReverseDispllay{
+
+  .RowReverseDispllay {
     display: none;
   }
-  .line{
+
+  .line {
     display: none;
   }
 }

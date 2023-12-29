@@ -1,8 +1,8 @@
-.heroImageContainer{
+.heroImageContainer {
     height: 100vh;
 }
 
-.overlayCSS{
+.overlayCSS {
     position: absolute;
     background-color: rgba(0, 0, 0, 0.5);
     width: 100%;
@@ -12,7 +12,7 @@
     justify-content: center;
 }
 
-.textAnimation{
+.textAnimation {
     color: white;
     font-size: 3em;
     text-align: center;

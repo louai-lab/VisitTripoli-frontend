@@ -62,8 +62,8 @@ const Card = ({ data, type }) => {
               {cardTime} {type === "hotel" ? <>min</> : ""}
             </p>
           </div>
-          <div className={style.priceButtun}>
-            <div className={style.starRatiang}>
+          <div className={style.priceButton}>
+            <div className={style.starRating}>
               <Star color="#ffd700" />
               <p className={style.price}>{cardRating}</p>
             </div>

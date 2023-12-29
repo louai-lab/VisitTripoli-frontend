@@ -1,8 +1,8 @@
 import React from "react";
 
 export default function Logo(props) {
-  let height = 69;
-  let width = 258;
+  let height = 50;
+  let width = 200;
 
   let colorOne = "#314865";
   let colorTwo = "black";
@@ -14,8 +14,8 @@ export default function Logo(props) {
   }
 
   if(props.size =="small"){
-    height = 55;
-    width = 206;
+    height = 40;
+    width = 100;
   }
   return (
     <div>

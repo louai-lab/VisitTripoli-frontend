@@ -6,6 +6,7 @@
   background-position: center;
   position: relative;
 }
+
 .map .first {
   width: 100px;
   height: 100px;
@@ -14,34 +15,42 @@
   transform: translateZ(0);
   transition: transform 0.25s ease-out;
 }
+
 @media (max-width: 992px) {
   .map .first {
     display: none;
   }
 }
+
 .map .first:hover {
   transform: scale(1.5);
 }
+
 .map .khan {
   top: 30%;
   left: 50%;
 }
+
 .map .citadel {
   top: 40%;
   right: 20%;
 }
+
 .map .taynal {
   top: 70%;
   left: 60%;
 }
+
 .map .corniche {
   left: 15%;
   top: 25%;
 }
+
 .map .rachid {
   top: 55%;
   left: 33%;
 }
+
 .map .mansouri {
   top: 10%;
   right: 10%;

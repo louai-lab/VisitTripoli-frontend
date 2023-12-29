@@ -4,6 +4,7 @@
   width: fit-content;
   color: #314865;
 }
+
 .link {
   text-decoration: none;
   padding: 10px;
@@ -15,10 +16,12 @@
   width: fit-content;
   border: 1px solid #314865;
 }
+
 .link:hover {
   background-color: white;
   color: #314865;
 }
+
 @media (max-width: 480px) {
   .heading {
     font-size: 2rem;

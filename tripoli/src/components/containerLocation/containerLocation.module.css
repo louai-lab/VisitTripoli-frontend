@@ -4,6 +4,7 @@
   border: 1px solid #314865;
   align-items: center;
 }
+
 .boxCol {
   display: flex;
   flex-direction: row;
@@ -31,9 +32,11 @@
   .monuments {
     display: none;
   }
+
   .line {
     display: none;
   }
+
   .title {
     font-size: 30px;
   }

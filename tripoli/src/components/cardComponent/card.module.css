@@ -1,58 +1,59 @@
-.card{
-    width:25.03rem;
+.card {
+    width: 25.03rem;
     display: flex;
     flex-direction: column;
     margin: 1rem 3rem;
     border-radius: 5px;
-    box-shadow:2px 3px 10px grey ;
+    box-shadow: 2px 3px 10px grey;
     /* height: 32rem; */
 }
 
-.title{
+.title {
     font-size: 30px;
     margin: 10px 0;
     height: 70px;
-    
+
 
 }
 
-.location, .time{
+.location,
+.time {
     font-size: 20px;
     margin: 10px 0px;
     padding: 7px;
 
 }
 
-.price{
+.price {
     font-size: 20px;
     margin-left: 4px;
 }
 
-.information{
-    padding: 0rem 3rem 1rem 1.5rem ;
+.information {
+    padding: 0rem 3rem 1rem 1.5rem;
     display: flex;
     flex-direction: column;
 }
 
-.hotelImg{
+.hotelImg {
     width: 100%;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
-    transition: all 1s cubic-bezier(0, 0 ,0.2, 1);
+    transition: all 1s cubic-bezier(0, 0, 0.2, 1);
     height: 260px;
 }
 
-.overflow{
+.overflow {
     overflow: hidden;
 }
 
-.hotelImg:hover{
+.hotelImg:hover {
     filter: grayscale(0);
     transform: scale3d(1.1, 1.1, 1.1);
     cursor: pointer;
 }
 
-.priceButtun{
+.priceButton {
     /* background:blueviolet; */
     display: flex;
     align-items: center;
@@ -62,7 +63,7 @@
 
 }
 
-.buttonView{
+.buttonView {
     background: #314865;
     width: 105px;
     height: 41px;
@@ -70,17 +71,18 @@
     color: #FFF;
     font-size: 20px;
     border: none;
-    cursor: pointer;  
-    margin-right: 10px;  
+    cursor: pointer;
+    margin-right: 10px;
 }
 
-.buttonView:hover{
+.buttonView:hover {
     background: white;
-    color:#314865;
-    border: 1px solid #314865 ;
+    color: #314865;
+    border: 1px solid #314865;
 }
 
-.LocationIconStyle, .CarIconStayle{
+.LocationIconStyle,
+.CarIconStayle {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -88,48 +90,57 @@
 
 }
 
-.threeInfo{
+.threeInfo {
     display: flex;
     flex-direction: column;
     margin: 0;
 }
-.starRatiang{
+
+.starRating {
     display: flex;
     align-items: center;
     margin-left: -6px;
 }
-@media(max-width: 1500px){
-    .card{
+
+@media(max-width: 1500px) {
+    .card {
         width: 24rem;
     }
-    .buttonView{
+
+    .buttonView {
         margin-right: 25px;
 
     }
 }
-@media (max-width: 1000px){
-    .card{
+
+@media (max-width: 1000px) {
+    .card {
         width: 21rem;
     }
-        .title{
-            font-size: 27px;
 
-        }
-        .location,.time,.price{
-            font-size: 18px;
-        }
-        .buttonView{
-            margin-right: 72px;
+    .title {
+        font-size: 27px;
+
+    }
+
+    .location,
+    .time,
+    .price {
+        font-size: 18px;
+    }
+
+    .buttonView {
+        margin-right: 72px;
         width: 95px;
         height: 38px;
         font-size: 18px;
-        }
-
     }
+
+}
 
 
 @media (max-width: 400px) {
-    .card {   
+    .card {
         width: 19rem;
         display: flex;
         flex-direction: column;
@@ -137,15 +148,20 @@
         border-radius: 5px;
         box-shadow: 2px 3px 10px grey;
         height: 28rem;
-}
-    .title{
+    }
+
+    .title {
         font-size: 23px;
         margin: 15px 0;
     }
-    .location,.time,.price{
+
+    .location,
+    .time,
+    .price {
         font-size: 17px;
     }
-    .buttonView{
+
+    .buttonView {
         background: #314865;
         width: 78px;
         height: 35px;
@@ -157,4 +173,4 @@
         margin-right: 105px;
     }
 
-}    
+}

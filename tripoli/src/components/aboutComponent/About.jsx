@@ -7,13 +7,12 @@ const About = (props) => {
   return (
     <>
       <div
-        className={`${
-          direction === "top" ? style.RowDisplay : style.RowReverseDispllay
-        }`}
+        className={`${direction === "top" ? style.RowDisplay : style.RowReverseDisplay
+          }`}
       >
-        {direction === "top"?<img src={image1} className={style.aboutImage} alt="about" /> : <img src={image2} className={style.aboutImage }/>}
+        {direction === "top" ? <img src={image1} className={style.aboutImage} alt="about" /> : <img src={image2} className={style.aboutImage} />}
         <div>
-          {direction ==="top"?<h1 className={style.title}>ABOUT VISITRIPOLI</h1> : <h1 className={style.title}>JEWEL OF THE MEDITERRANEAN</h1>}
+          {direction === "top" ? <h1 className={style.title}>ABOUT VISITRIPOLI</h1> : <h1 className={style.title}>JEWEL OF THE MEDITERRANEAN</h1>}
           {direction == "top" ? (
             <p className={style.paragAbout}>
               Welcome to Discovering Tripoli's Heritage, a platform dedicated to

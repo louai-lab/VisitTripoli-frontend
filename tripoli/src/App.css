@@ -1,3 +1,10 @@
+:root {
+  --dark: #2b2d42;
+  --light: #abd5bd;
+  --border: #dee2e6;
+  --border-btn: #edf2f4;
+}
+
 .App {
   text-align: center;
 }
@@ -32,6 +39,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
