@@ -18,7 +18,8 @@ import RowUser from "./RowUser.jsx";
 import { Button, ButtonToolbar } from "rsuite";
 import FormAdd from "./FormAdd.jsx";
 import DeleteConfirmationDialog from "./DeleteConfirmationModal.jsx";
-import { ToastContainer , toast } from 'react-toastify';
+import { ToastContainer, toast } from "react-toastify";
+import Search from "../../search/Search.jsx";
 
 const columns = [
   { id: "id", label: "ID", minWidth: 10 },
@@ -42,6 +43,9 @@ export default function DashboardUsers() {
   const [userData, setUserData] = useState(null);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [userDataToDelete, setUserDataToDelete] = useState(null);
+  const [searchText, setSearchText] = useState("");
+
+  
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -70,13 +74,11 @@ export default function DashboardUsers() {
     fetchData();
   }, []);
 
-
   // for showing the image
   const getImageUrl = (image) => {
     // Assuming the base URL is http://localhost:4000/images
     return `http://localhost:4000/images/${image}`;
   };
-
 
   // Edit a user
   const handleEdit = (rowId) => {
@@ -86,17 +88,20 @@ export default function DashboardUsers() {
     setUserData(selectedRowData);
   };
 
-
   // Confirmation the Delete
   const confirmDelete = async () => {
     try {
-      await axios.delete(`${process.env.REACT_APP_BACKEND}/user/delete/${userDataToDelete.id}`);
-      setData((prevData) => prevData.filter((row) => row.id !== userDataToDelete.id));
-      toast.success('User deleted successfully');
+      await axios.delete(
+        `${process.env.REACT_APP_BACKEND}/user/delete/${userDataToDelete.id}`
+      );
+      setData((prevData) =>
+        prevData.filter((row) => row.id !== userDataToDelete.id)
+      );
+      toast.success("User deleted successfully");
       setIsDeleteModalOpen(false);
     } catch (error) {
-      console.error('Error deleting user:', error);
-      toast.error('Error deleting user');
+      console.error("Error deleting user:", error);
+      toast.error("Error deleting user");
       setIsDeleteModalOpen(false);
     }
   };
@@ -123,34 +128,51 @@ export default function DashboardUsers() {
 
   // Add A new user
   const handleAdd = async (event) => {
-   try{
-    const formDataToSend = new FormData();
-    Object.entries(formData).forEach(([key,value]) =>{
-        formDataToSend.append(key,value);
-    })
+    try {
+      const formDataToSend = new FormData();
+      Object.entries(formData).forEach(([key, value]) => {
+        formDataToSend.append(key, value);
+      });
 
-    const response = await axios.post(`${process.env.REACT_APP_BACKEND}/user/register`, formDataToSend)
-    toast.success('User added successfully');
-    console.log(response.data)
-    setData((prevData) => [...prevData, response.data]);
-    setFormData({
-        name: '',
-        email: '',
-        password: '',
-        role: '',
+      const response = await axios.post(
+        `${process.env.REACT_APP_BACKEND}/user/register`,
+        formDataToSend
+      );
+      toast.success("User added successfully");
+      console.log(response.data);
+      setData((prevData) => [...prevData, response.data]);
+      setFormData({
+        name: "",
+        email: "",
+        password: "",
+        role: "",
         image: null,
       });
       setIsFormAdd(false);
-   }
-   catch(error){
-    console.log(error)
-    toast.error('Error adding user');
-   }
+    } catch (error) {
+      console.log(error);
+      toast.error("Error adding user");
+    }
   };
+
+  const filterDatabySearch = (userData) => {
+    let filteredData = userData;
+  
+    if (searchText) {
+      const lowerSearchText = searchText.toLowerCase().trim();
+      filteredData = userData.filter((item) =>
+        item.name && item.name.toLowerCase().includes(lowerSearchText)
+      );
+    }
+  
+    return filteredData;
+  };
+
+  const filteredData = filterDatabySearch(data);
 
   return (
     <div>
-      <ToastContainer/>
+      <ToastContainer />
       {isLoading ? (
         <div
           style={{
@@ -199,9 +221,12 @@ export default function DashboardUsers() {
                 display: "flex",
                 justifyContent: "space-between",
                 margin: "10px",
-              }}
+              }} className="headerUser"
             >
               <h1 style={{ color: "#314865" }}>Users</h1>
+
+              <Search searchText={searchText} setSearchText={setSearchText} />
+
               <ButtonToolbar>
                 <Button
                   onClick={openAddForm}
@@ -238,7 +263,7 @@ export default function DashboardUsers() {
                       </TableRow>
                     </TableHead>
                     <TableBody>
-                      {data
+                      {filteredData
                         .slice(
                           page * rowsPerPage,
                           page * rowsPerPage + rowsPerPage
@@ -280,7 +305,7 @@ export default function DashboardUsers() {
                                 >
                                   <UpdateIcon style={{ color: "green" }} />
                                 </button>
-                                
+
                                 <button
                                   onClick={() => handleDelete(row.id)}
                                   color="secondary"
