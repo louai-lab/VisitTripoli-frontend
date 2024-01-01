@@ -42,50 +42,46 @@ const FormAdd = ({formData , setFormData , handleAdd , closeHandler , isFormAdd 
         width: "400px",
         height: "600px",
         border: "none",
-        backgroundColor: "rgba(49, 72, 101, 0.8)",
+        backgroundColor: "rgba(49, 72, 101)",
         color: "white",
         zIndex: "1",
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
+        overflowY: "auto"
       }}
     >
-      <h3>Add A Tour</h3>
+      <h3 style={{marginTop: "40px"}}>Add A Tour</h3>
       <Form>
         <Form.Group controlId="name">
-          <Form.ControlLabel>Title</Form.ControlLabel>
+          <Form.ControlLabel>Title*</Form.ControlLabel>
           <Form.Control name="title" onChange={(value) => handleInputChange("title", value)} />
-          <Form.HelpText>Title is required</Form.HelpText>
         </Form.Group>
         <Form.Group controlId="startTime">
-          <Form.ControlLabel>Start Date</Form.ControlLabel>
+          <Form.ControlLabel>Start Date*</Form.ControlLabel>
           <Form.Control name="startTime" onChange={(value) => handleInputChange("startTime", value)} />
-          <Form.HelpText>Start Date is required</Form.HelpText>
         </Form.Group>
         <Form.Group controlId="endTime">
-          <Form.ControlLabel>End Date</Form.ControlLabel>
+          <Form.ControlLabel>End Date*</Form.ControlLabel>
           <Form.Control name="endTime" onChange={(value) => handleInputChange("endTime", value)} />
-          <Form.HelpText>End Date is required</Form.HelpText>
         </Form.Group>
         <Form.Group controlId="price">
-          <Form.ControlLabel>Price</Form.ControlLabel>
+          <Form.ControlLabel>Price*</Form.ControlLabel>
           <Form.Control name="price" onChange={(value) => handleInputChange("price", value)} />
-          <Form.HelpText>Price is required</Form.HelpText>
         </Form.Group>
 
         <Form.Group controlId="image">
-          <Form.ControlLabel>Image</Form.ControlLabel>
+          <Form.ControlLabel>Image*</Form.ControlLabel>
           <input type="file" accept="image/*" onChange={handleImageChange} />
         </Form.Group>
 
         <Form.Group controlId="userId">
-          <Form.ControlLabel>User Id</Form.ControlLabel>
+          <Form.ControlLabel>User Id*</Form.ControlLabel>
           <Form.Control name="userId" onChange={(value) => handleInputChange("userId", value)} />
-          <Form.HelpText>User Idz is required</Form.HelpText>
         </Form.Group>
 
-        <Form.Group>
+        <Form.Group style={{marginBottom: "30px"}}>
           <ButtonToolbar>
             <Button
               onClick={handleAdd}

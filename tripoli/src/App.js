@@ -123,9 +123,8 @@ function App() {
         <Route path="/admin/tours/update/:id" element={<Update />} />
         <Route path="/admin/tours/add" element={<Add />} />
         <Route path="/*" element={<NotFound />} />
-        <Route path="/dashboard" element={<DashboardPages />}/>
-        <Route path="/dashboard/test" element={<DashboardPages> <Test /> </DashboardPages>}/>
 
+        <Route path="/dashboard" element={<DashboardPages> <DashboardLocations /> </DashboardPages>}/>
         <Route path="/dashboard/locations" element={<DashboardPages> <DashboardLocations /> </DashboardPages>}/>
         <Route path="/dashboard/users" element={<DashboardPages> <DashboardUsers /> </DashboardPages>}/>
         <Route path="/dashboard/tours" element={<DashboardPages> <DashboardTours /> </DashboardPages>}/>
