@@ -19,12 +19,12 @@ function SidebarForDash() {
             All Locations
             </li>
           </Link>
-        <Link to="dashboard/tours">
+        <Link to="/dashboard/tours">
         <li className={Styles.sidebarListItem}>
             All Tours
             </li>
           </Link>
-        <Link to="dashboard/hotes">
+        <Link to="/dashboard/hotes">
         <li className={Styles.sidebarListItem}>
             All Hotels
         </li>

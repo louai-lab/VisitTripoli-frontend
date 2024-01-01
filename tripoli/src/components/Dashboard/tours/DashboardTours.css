@@ -1,0 +1,10 @@
+img{
+    width: 100px;
+}
+
+@media screen and (max-width: 750px){
+    .headerUser{
+        flex-direction: column;
+        row-gap: 10px;
+    }
+}
