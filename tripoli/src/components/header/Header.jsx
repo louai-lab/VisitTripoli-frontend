@@ -54,18 +54,10 @@ export default function Header() {
         <nav className={HeaderCSS.navMainStyle}>
 
           <ul className={HeaderCSS.navUl}>
-<<<<<<< HEAD
             <li><Link to='/home/locations'>Locations</Link></li>
             <li><Link to='/home/hotels'>Hotels</Link></li>
             <li><Link to='/home/tours'>Tours</Link></li>
             <li onMouseEnter={handleMapIcon} onMouseLeave={handleMapIcon}><a href="/home/#map"><MapIcon place="header" hovered={mapHovered}></MapIcon></a></li>
-=======
-            <li><Link to='/'>Home</Link></li>
-            <li><Link to='/locations'>Locations</Link></li>
-            <li><Link to='/hotels'>Hotels</Link></li>
-            <li><Link to='/tours'>Tours</Link></li>
-            <li onMouseEnter={handleMapIcon} onMouseLeave={handleMapIcon}><a href="/#map"><MapIcon place="header" hovered={mapHovered}></MapIcon></a></li>
->>>>>>> Rachwan
           </ul>
 
            <ul className={toggleClasses}>
