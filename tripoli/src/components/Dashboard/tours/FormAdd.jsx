@@ -51,21 +51,27 @@ const FormAdd = ({formData , setFormData , handleAdd , closeHandler , isFormAdd 
         alignItems: "center",
       }}
     >
-      <h3>Add User</h3>
+      <h3>Add A Tour</h3>
       <Form>
         <Form.Group controlId="name">
-          <Form.ControlLabel>Name</Form.ControlLabel>
-          <Form.Control name="name" onChange={(value) => handleInputChange("name", value)} />
-          <Form.HelpText>Username is required</Form.HelpText>
+          <Form.ControlLabel>Title</Form.ControlLabel>
+          <Form.Control name="title" onChange={(value) => handleInputChange("title", value)} />
+          <Form.HelpText>Title is required</Form.HelpText>
         </Form.Group>
-        <Form.Group controlId="email">
-          <Form.ControlLabel>Email</Form.ControlLabel>
-          <Form.Control name="email" onChange={(value) => handleInputChange("email", value)} type="email" />
-          <Form.HelpText tooltip>Email is required</Form.HelpText>
+        <Form.Group controlId="startTime">
+          <Form.ControlLabel>Start Date</Form.ControlLabel>
+          <Form.Control name="startTime" onChange={(value) => handleInputChange("startTime", value)} />
+          <Form.HelpText>Start Date is required</Form.HelpText>
         </Form.Group>
-        <Form.Group controlId="password">
-          <Form.ControlLabel>Password</Form.ControlLabel>
-          <Form.Control name="password" type="password" onChange={(value) => handleInputChange("password", value)} autoComplete="off" />
+        <Form.Group controlId="endTime">
+          <Form.ControlLabel>End Date</Form.ControlLabel>
+          <Form.Control name="endTime" onChange={(value) => handleInputChange("endTime", value)} />
+          <Form.HelpText>End Date is required</Form.HelpText>
+        </Form.Group>
+        <Form.Group controlId="price">
+          <Form.ControlLabel>Price</Form.ControlLabel>
+          <Form.Control name="price" onChange={(value) => handleInputChange("price", value)} />
+          <Form.HelpText>Price is required</Form.HelpText>
         </Form.Group>
 
         <Form.Group controlId="image">
@@ -73,16 +79,10 @@ const FormAdd = ({formData , setFormData , handleAdd , closeHandler , isFormAdd 
           <input type="file" accept="image/*" onChange={handleImageChange} />
         </Form.Group>
 
-        <Form.Group>
-          <SelectPicker
-            data={[
-              // { value: "guide", label: "Guide" },
-              { value: "admin", label: "Admin" },
-            ]}
-            placeholder="Select Role"
-            name="role"
-            onChange={(value) => handleInputChange("role", value)}
-          />
+        <Form.Group controlId="userId">
+          <Form.ControlLabel>User Id</Form.ControlLabel>
+          <Form.Control name="userId" onChange={(value) => handleInputChange("userId", value)} />
+          <Form.HelpText>User Idz is required</Form.HelpText>
         </Form.Group>
 
         <Form.Group>

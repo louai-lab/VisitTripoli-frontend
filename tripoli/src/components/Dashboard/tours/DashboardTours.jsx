@@ -183,7 +183,7 @@ export default function DashboardTours() {
   return (
     <div>
       <Helmet>
-        <title>Dashboard - Tours</title>
+        <title>Dashboard ~ Tours</title>
         <meta name="description" content="Explore and manage tours in Tripoli through our user-friendly dashboard. Plan, organize, and optimize your travel experiences." />
         <meta name="keywords" content="Visit Tripoli, tours, travel planning, dashboard, manage tours, Tripoli attractions" />
       </Helmet>
