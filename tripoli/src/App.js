@@ -6,9 +6,10 @@ import UserContext from "./useContext/userContext";
 import { Navigate } from "react-router-dom";
 import Locations from "./pages/locations/Locations";
 import React from "react";
-import NotFound from "./components/Not Found/NotFound";
 import DashboardLocations from "./components/Dashboard/locations/DashboardLocations";
 import DashboardUsers from "./components/Dashboard/users/DashboardUsers";
+import NotFound from "./pages/NotFound/NotFound";
+
 import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import Tour from "./pages/Tour/Tour";

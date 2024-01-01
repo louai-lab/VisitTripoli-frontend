@@ -26,12 +26,12 @@ function Home({ api, tourApi, hotelapi }) {
       <h3 className={styles.heading}>Hotel</h3>
       <HotelContainer hotelapi={newApi} />
       <Link to="/hotels" className={styles.link}>
-        View more &gt;&gt;
+        View More &gt;&gt;
       </Link>
       <h3 className={styles.heading}>Tours</h3>
       <TourCard api={tourApi} home="true" />
       <Link to="/tours" className={styles.link}>
-        View more &gt;&gt;
+        View More &gt;&gt;
       </Link>
     </>
   );

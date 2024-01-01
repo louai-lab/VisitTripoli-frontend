@@ -66,12 +66,13 @@
     background: #314865;
     width: 105px;
     height: 41px;
-    border-radius: 100px;
     color: #FFF;
     font-size: 20px;
     border: none;
     cursor: pointer;  
-    margin-right: 10px;  
+    margin-right: 10px; 
+    border-radius: 4px;
+    transition: .3s; 
 }
 
 .buttonView:hover{
