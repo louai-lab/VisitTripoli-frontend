@@ -21,6 +21,8 @@
 }
 .text {
   margin-bottom: 30px;
+  text-align: left;
+  width: 100%;
 }
 .text .mainTitle {
   color: black;
@@ -39,7 +41,7 @@ form .input {
 }
 .input input {
   padding: 10px 20px 10px 10px;
-  width: 90%;
+  width: 100%;
   border: none;
   border-bottom: 1px solid #ccc;
   outline: 0;
@@ -80,7 +82,6 @@ form .input {
   cursor: pointer;
 }
 .submitBtn {
-  /* width: calc(60% + 20px); */
   width: 100%;
   font-size: 16px;
   display: flex;
@@ -97,6 +98,7 @@ form .input {
   cursor: pointer;
   transition: 0.5s;
   margin: 0 auto;
+  height: 52px;
 }
 .submitBtn:hover {
   background: #26384c;
@@ -105,34 +107,34 @@ form .input {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* width: calc(60% + 10px); */
   width: 100%;
   gap: 10px;
   border: 1px solid #ccc;
-  padding: 0px;
+  padding: 10px;
   margin-top: 20px;
   cursor: pointer;
+  height: 52px;
 }
 .googleIcon {
   width: 30px;
 }
-.loginP {
+.signinP {
   width: 70%;
   text-align: center;
+  margin-top: 10px;
 }
-.login {
+.signin a {
   text-decoration: underline;
   margin-left: 10px;
-}
-@media (max-width: 992px) {
-  /* .main { */
-  /* gap: 80px; */
-  /* } */
+  color: blue;
 }
 
 @media (max-width: 992px) {
   .text .mainTitle {
     font-size: 30px;
+  }
+  .submitBtn {
+    padding: 0;
   }
   .content .googleButton {
     gap: 10px;
@@ -153,13 +155,15 @@ form .input {
   .googleButton {
     width: 90%;
   }
+  .text {
+    width: 90%;
+  }
 }
 
 
 
 @media (max-width: 768px) {
   .main {
-    display: block;
     margin: auto;
   }
   .mainTitle {
@@ -177,19 +181,10 @@ form .input {
     top: 50%; */
     /* transform: translateY(-50%); */
   }
-
-  .loginP {
+  .text {
+  width: 90%;
+  }
+  .signinP {
     margin-bottom: 20px;
   }
 }
-
-@media (max-width: 770px) {
-  /* .googleButton{
-    width: fit-content;
-  } */
-
-  .try{
-    margin-top: 50px;
-  }
-}
-

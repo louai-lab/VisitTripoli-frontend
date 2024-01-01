@@ -162,10 +162,10 @@ function SignUp() {
               />
               <p className={style.slogan}>Sign up with Google</p>
             </div>
-            <p className={style.loginP}>
+            <p className={style.signinP}>
               Already have account?
-              <span className={style.login}>
-                <Link to={"/signin"}>LogIn</Link>
+              <span className={style.signin}>
+                <Link to={"/signin"}>SignIn</Link>
               </span>
             </p>
           </div>
