@@ -19,8 +19,6 @@ const RowTour = ({
   tourData,
   setTourData,
 }) => {
-  const [logoFile, setLogoFile] = useState(null);
-
   const [formData, setFormData] = useState({
     title: tourData.title || "",
     startTime: tourData.startTime || "",
@@ -39,7 +37,6 @@ const RowTour = ({
 
   const handleImageChange = (e) => {
     const filee = e.target.files[0];
-    setLogoFile(filee);
     if (filee) {
       setFormData({
         ...formData,
@@ -51,15 +48,6 @@ const RowTour = ({
   const handleUpdate = async () => {
     try {
       const formDataToSend = new FormData();
-      // formDataToSend.append('title', formData.title);
-      // formDataToSend.append('startTime', formData.startTime);
-      // formDataToSend.append('endTime', formData.endTime);
-      // formDataToSend.append('price', formData.price);
-      // formDataToSend.append('userId', formData.userId);
-
-      // if (logoFile) {
-      //   formDataToSend.append('Logo', logoFile);
-      // }
 
       Object.entries(formData).forEach(([key, value]) => {
         formDataToSend.append(key, value);
@@ -90,9 +78,6 @@ const RowTour = ({
     }
   };
 
- 
-
-
   return (
     <>
       <ToastContainer />
@@ -105,7 +90,7 @@ const RowTour = ({
           width: "400px",
           height: "600px",
           border: "none",
-          backgroundColor: "rgba(49, 72, 101, 0.8)",
+          backgroundColor: "rgba(49, 72, 101)",
           color: "white",
           zIndex: "1",
           display: "flex",
@@ -118,10 +103,11 @@ const RowTour = ({
             <Form.ControlLabel>Title</Form.ControlLabel>
             <Form.Control
               name="title"
-              defaultValue={formData.title}
-              value={formData.title}
+              defaultValue={tourData.title}
+              value={tourData.title}
               onChange={(valuee) => handleInputChange("title", valuee)}
               required={false}
+              style={{width: "360px"}}
             />
           </Form.Group>
           <Form.Group controlId="startTime">
@@ -129,10 +115,10 @@ const RowTour = ({
             <Form.Control
               name="startTime"
               type="text"
-              // value={userData.email}
-              defaultValue={formData.startTime}
+              defaultValue={tourData.startTime}
               onChange={(value) => handleInputChange("startTime", value)}
               required={false}
+              style={{width: "360px"}}
             />
           </Form.Group>
           <Form.Group controlId="endTime">
@@ -140,10 +126,10 @@ const RowTour = ({
             <Form.Control
               name="endTime"
               type="text"
-              // value={userData.email}
-              defaultValue={formData.endTime}
+              defaultValue={tourData.endTime}
               onChange={(value) => handleInputChange("endTime", value)}
               required={false}
+              style={{width: "360px"}}
             />
           </Form.Group>
           <Form.Group controlId="price">
@@ -151,10 +137,10 @@ const RowTour = ({
             <Form.Control
               name="price"
               type="number"
-              // value={userData.email}
-              defaultValue={formData.price}
+              defaultValue={tourData.price}
               onChange={(value) => handleInputChange("price", value)}
               required={false}
+              style={{width: "360px"}}
             />
           </Form.Group>
           <Form.Group controlId="userId">
@@ -162,17 +148,15 @@ const RowTour = ({
             <Form.Control
               name="userId"
               type="number"
-              // value={userData.email}
-              defaultValue={formData.userId}
-              // onChange={(value) => handleInputChange("userId", value)}
+              defaultValue={tourData.userId}
               required={false}
               readOnly={true}
+              style={{width: "360px"}}
             />
           </Form.Group>
 
           <Form.Group controlId="image">
             <Form.ControlLabel>Image</Form.ControlLabel>
-            {/* <input type="file" accept="image/*" onChange={handleImageChange} /> */}
 
             <input
             type="file"
@@ -184,7 +168,7 @@ const RowTour = ({
               <img
                 src={getImageUrl(tourData.image)}
                 alt="Tour"
-                style={{ maxWidth: "100%", maxHeight: "150px" }}
+                style={{ maxWidth: "100px", maxHeight: "55px" }}
               />
             )}
           </Form.Group>

@@ -35,7 +35,7 @@ const columns = [
   { id: "title", label: "Title", minWidth: 10 },
   { id: "startTime", label: "Start Date", minWidth: 10 },
   { id: "endTime", label: "End Date", minWidth: 10 },
-  { id: "price", label: "Price", minWidth: 10 },
+  { id: "price", label: "Price", minWidth: 10},
   { id: "userId", label: "User Id", minWidth: 10 },
 ];
 
@@ -181,7 +181,7 @@ export default function DashboardTours() {
   const filteredData = filterDatabySearch(data);
 
   return (
-    <div>
+    <div className="main">
       <Helmet>
         <title>Dashboard ~ Tours</title>
         <meta name="description" content="Explore and manage tours in Tripoli through our user-friendly dashboard. Plan, organize, and optimize your travel experiences." />
@@ -236,18 +236,24 @@ export default function DashboardTours() {
               style={{
                 display: "flex",
                 justifyContent: "space-between",
-                margin: "10px",
+                marginBottom: "30px",
               }} className="headerUser"
             >
               <h1 style={{ color: "#314865" }}>Tours</h1>
 
+              <div
+                style={{
+                  display: "flex",
+                  gap: "30px",
+                }}
+                >
               <Search searchText={searchText} setSearchText={setSearchText} />
 
               <ButtonToolbar>
                 <Button
                   onClick={openAddForm}
                   appearance="primary"
-                  style={{ backgroundColor: "#BB9463" }}
+                  style={{ backgroundColor: "#BB9463", padding: "12px 20px", fontSize: "17px" }}
                 >
                   <span style={{ marginRight: "5px", fontWeight: "bold" }}>
                     +{" "}
@@ -255,6 +261,7 @@ export default function DashboardTours() {
                   Add Tour
                 </Button>
               </ButtonToolbar>
+              </div>
             </div>
             <div>
               <Paper sx={{ width: "100%", overflow: "hidden" }}>
@@ -298,6 +305,7 @@ export default function DashboardTours() {
                                     <img
                                       src={getImageUrl(row[column.id])}
                                       alt=""
+                                      className="image"
                                     />
                                   ) : (
                                     row[column.id]

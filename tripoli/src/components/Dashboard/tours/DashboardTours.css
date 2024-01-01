@@ -1,5 +1,9 @@
-img{
-    width: 100px;
+.main {
+    padding: 25px;
+}
+.image{
+    max-width: 100px;
+    max-height: 55px;
 }
 
 @media screen and (max-width: 750px){
