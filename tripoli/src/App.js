@@ -23,6 +23,8 @@ import SignUp from "./pages/SignUp/SignUp";
 import SignIn from "./pages/SignIn/SignIn";
 import DashboardPages from "./pages/NewDashbaord/NewDashboard";
 import { Test } from "./pages/TestPage/test";
+import { HelmetProvider, Helmet } from 'react-helmet-async';
+import FavIcon from './images/favicon.jpg'
 
 function App() {
   const [user, setUser] = useState(null);
@@ -84,6 +86,10 @@ function App() {
 
   }, []);
   return (
+  <HelmetProvider>
+    <Helmet>
+      <link rel="shortcut icon" href={FavIcon} type="image/x-icon" />
+    </Helmet>
     <UserContext.Provider value={{ user, setUser }}>
       <Routes>
         <Route path="/signup" element={<SignUp />} />
@@ -124,6 +130,7 @@ function App() {
 
       </Routes>
     </UserContext.Provider>
+    </HelmetProvider>
   );
 }
 

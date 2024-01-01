@@ -10,6 +10,7 @@ import hide from "../../images/hide.png";
 import UserContext from "../../useContext/userContext";
 
 import "react-toastify/dist/ReactToastify.css";
+import { Helmet } from "react-helmet-async";
 
 function SignUp() {
   const { user , setUser } = useContext(UserContext)
@@ -80,6 +81,11 @@ function SignUp() {
 
   return (
     <>
+    <Helmet>
+    <title>Visit Tripoli - Sign Up</title>
+    <meta name="description" content="Join us to unlock exclusive travel deals and discover the beauty of Tripoli. Sign up now!" />
+    <meta name="keywords" content="Tripoli, travel deals, sign up, tourism, explore Tripoli" />
+    </Helmet>
       <ToastContainer
         position="top-right"
         autoClose={5000}
