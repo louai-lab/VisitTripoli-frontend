@@ -13,7 +13,6 @@ import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import Tour from "./pages/Tour/Tour";
 import Hotel from "./pages/Hotel/Hotel";
-
 import AllLocations from "./pages/AllLocations/AllLocations";
 import Dashboard from "./components/Dashboard/Dashboard";
 import Add from "./components/Dashboard/Add";
@@ -23,13 +22,15 @@ import SignUp from "./pages/SignUp/SignUp";
 import SignIn from "./pages/SignIn/SignIn";
 import DashboardPages from "./pages/NewDashbaord/NewDashboard";
 import { Test } from "./pages/TestPage/test";
+import NetworkError from "./pages/NetworkError/NetworkError";
+import ProtectedRoute from "./ProtectedRoute.js";
 
 function App() {
   const [user, setUser] = useState(null);
   let [tourApi, setTourApi] = useState([]);
   let [locationApi, setLocationApi] = useState([]);
   let [hotels, setHotels] = useState([]);
-  axios.defaults.withCredentials = true
+  axios.defaults.withCredentials = true;
 
   useEffect(() => {
     async function fetchTours() {
@@ -66,26 +67,25 @@ function App() {
     }
     fetchHotels();
 
-    async function fetchUser(){
-    if(!user){
-      try {
-        const response = await axios.get(
-          `${process.env.REACT_APP_BACKEND}/user/oneuser`
-        );
-        setUser(response.data);
-      } catch (error) {
-        console.error(error);
+    async function fetchUser() {
+      if (!user) {
+        try {
+          const response = await axios.get(
+            `${process.env.REACT_APP_BACKEND}/user/oneuser`
+          );
+          setUser(response.data);
+          console.log(user);
+        } catch (error) {
+          console.error(error);
+        }
       }
     }
-  }
-  fetchUser()
-
-
-
-  }, []);
+    fetchUser();
+  }, [user]);
   return (
     <UserContext.Provider value={{ user, setUser }}>
-      <Routes>
+      {/* <Routes>
+        <Route path="/network_error" element={<NetworkError />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/signin" element={<SignIn />} />
 
@@ -112,16 +112,108 @@ function App() {
             element={<Locations element={locationApi} />}
           />
         </Route>
+        
         <Route path="/admin/tours" element={<Dashboard />} />
         <Route path="/admin/tours/update/:id" element={<Update />} />
         <Route path="/admin/tours/add" element={<Add />} />
         <Route path="/*" element={<NotFound />} />
-        <Route path="/dashboard" element={<DashboardPages />}/>
-        <Route path="/dashboard/test" element={<DashboardPages> <Test /> </DashboardPages>}/>
+        <Route path="/dashboard" element={<DashboardPages />} />
+        <Route
+          path="/dashboard/test"
+          element={
+            <DashboardPages>
+              {" "}
+              <Test />{" "}
+            </DashboardPages>
+          }
+        />
 
-        <Route path="/dashboard/locations" element={<DashboardPages> <DashboardLocations /> </DashboardPages>}/>
-        <Route path="/dashboard/users" element={<DashboardPages> <DashboardUsers /> </DashboardPages>}/>
+        <Route
+          path="/dashboard/locations"
+          element={
+            <DashboardPages>
+              {" "}
+              <DashboardLocations />{" "}
+            </DashboardPages>
+          }
+        />
+        <Route
+          path="/dashboard/users"
+          element={
+            <DashboardPages>
+              {" "}
+              <DashboardUsers />{" "}
+            </DashboardPages>
+          }
+        />
+      </Routes> */}
 
+      <Routes>
+        {/* Public routes accessible to all users */}
+        <Route path="/network_error" element={<NetworkError />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/signin" element={<SignIn />} />
+
+        {/* Redirect to sign-in if no specific path matches */}
+        <Route path="/" element={<Navigate to="/signin" replace />} />
+
+        {/* Authenticated user routes */}
+        {/* <Route element={<ProtectedRoute isAllowed={user} />}> */}
+          <Route path="/home" element={<ContainerOfThePage />}>
+            <Route
+              index
+              element={
+                <Home api={locationApi} tourApi={tourApi} hotelapi={hotels} />
+              }
+            />
+            <Route path="tours" element={<Tour api={tourApi} />} />
+            <Route
+              path="hotels"
+              element={<Hotel hotelapi={hotels} home="false" />}
+            />
+            <Route
+              path="locations"
+              element={<AllLocations api={locationApi} />}
+            />
+            <Route
+              path="Location/:id"
+              element={<Locations element={locationApi} />}
+            />
+          </Route>
+
+          
+            <Route path="/admin/tours" element={<Dashboard />} />
+            <Route path="/admin/tours/update/:id" element={<Update />} />
+            <Route path="/admin/tours/add" element={<Add />} />
+            <Route path="/dashboard" element={<DashboardPages />} />
+            <Route
+              path="/dashboard/test"
+              element={
+                <DashboardPages>
+                  {" "}
+                  <Test />{" "}
+                </DashboardPages>
+              }
+            />
+            <Route
+              path="/dashboard/locations"
+              element={
+                <DashboardPages>
+                  {" "}
+                  <DashboardLocations />{" "}
+                </DashboardPages>
+              }
+            />
+            <Route
+              path="/dashboard/users"
+              element={
+                <DashboardPages>
+                  {" "}
+                  <DashboardUsers />{" "}
+                </DashboardPages>
+              }
+            />
+          
       </Routes>
     </UserContext.Provider>
   );
