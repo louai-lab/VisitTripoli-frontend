@@ -14,9 +14,10 @@ import "./DashboardLocations.css";
 import DeleteIcon from "@mui/icons-material/DeleteOutline";
 import UpdateIcon from "@mui/icons-material/UpdateSharp";
 import { CircularProgress } from "@mui/material";
-import RowUser from "../users/RowUser.jsx";
+// import RowUser from "../users/RowUser.jsx";
+import RowLocation from "./RowLocation.jsx";
 import { Button, ButtonToolbar } from "rsuite";
-import FormAdd from "../users/FormAdd.jsx";
+import LocationFormAdd from "./LocationFormAdd.jsx";
 import DeleteConfirmationDialog from "../users/DeleteConfirmationModal.jsx";
 import { ToastContainer, toast } from "react-toastify";
 import Search from "../../search/Search.jsx";
@@ -25,13 +26,6 @@ const columns = [
   { id: "id", label: "ID", minWidth: 10 },
   { id: "image", label: "Image", minWidth: 10 },
   { id: "name", label: "Name", minWidth: 10 },
-  { id: "role", label: "Role", minWidth: 10 },
-  {
-    id: "email",
-    label: "Email",
-    minWidth: 10,
-    align: "center",
-  },
 ];
 
 export default function DashboardLocations() {
@@ -39,10 +33,10 @@ export default function DashboardLocations() {
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [isLoading, setIsLoading] = useState(true);
   const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
-  const [isFormAdd, setIsFormAdd] = useState(false);
-  const [userData, setUserData] = useState(null);
+  const [isLocationFormAdd, setIsLocationFormAdd] = useState(false);
+  const [locationData, setLocationData] = useState(null);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-  const [userDataToDelete, setUserDataToDelete] = useState(null);
+  const [locationDataToDelete, setLocationDataToDelete] = useState(null);
   const [searchText, setSearchText] = useState("");
 
   
@@ -61,11 +55,11 @@ export default function DashboardLocations() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `${process.env.REACT_APP_BACKEND}/user`
+          `${process.env.REACT_APP_BACKEND}/location/all`
         );
-        const users = response.data;
-        // console.log(users)
-        setData(users);
+        const locations = response.data.data;
+        console.log(locations)
+        setData(locations);
         setIsLoading(false);
       } catch (error) {
         console.log(error);
@@ -85,23 +79,23 @@ export default function DashboardLocations() {
     console.log(rowId);
     setIsProfileModalOpen(true);
     const selectedRowData = data.find((row) => row.id === rowId);
-    setUserData(selectedRowData);
+    setLocationData(selectedRowData);
   };
 
   // Confirmation the Delete
   const confirmDelete = async () => {
     try {
       await axios.delete(
-        `${process.env.REACT_APP_BACKEND}/user/delete/${userDataToDelete.id}`
+        `${process.env.REACT_APP_BACKEND}/location/delete/${locationDataToDelete.id}`
       );
       setData((prevData) =>
-        prevData.filter((row) => row.id !== userDataToDelete.id)
+        prevData.filter((row) => row.id !== locationDataToDelete.id)
       );
-      toast.success("User deleted successfully");
+      toast.success("Location deleted successfully");
       setIsDeleteModalOpen(false);
     } catch (error) {
-      console.error("Error deleting user:", error);
-      toast.error("Error deleting user");
+      console.error("Error deleting location:", error);
+      toast.error("Error deleting location");
       setIsDeleteModalOpen(false);
     }
   };
@@ -109,20 +103,17 @@ export default function DashboardLocations() {
   // when click on deleteIcon to open a popUp
   const handleDelete = (rowId) => {
     const selectedRowData = data.find((row) => row.id === rowId);
-    setUserDataToDelete(selectedRowData);
+    setLocationDataToDelete(selectedRowData);
     setIsDeleteModalOpen(true);
   };
 
   // when click on add user , to open a form
   const openAddForm = () => {
-    setIsFormAdd(true);
+    setIsLocationFormAdd(true);
   };
 
   const [formData, setFormData] = useState({
     name: "",
-    email: "",
-    password: "",
-    role: "",
     image: null,
   });
 
@@ -135,32 +126,29 @@ export default function DashboardLocations() {
       });
 
       const response = await axios.post(
-        `${process.env.REACT_APP_BACKEND}/user/register`,
+        `${process.env.REACT_APP_BACKEND}/location/create`,
         formDataToSend
       );
-      toast.success("User added successfully");
+      toast.success("Location added successfully");
       console.log(response.data);
-      setData((prevData) => [...prevData, response.data]);
+      setData((prevData) => [...prevData, response.data.data]);
       setFormData({
         name: "",
-        email: "",
-        password: "",
-        role: "",
         image: null,
       });
-      setIsFormAdd(false);
+      setIsLocationFormAdd(false);
     } catch (error) {
       console.log(error);
-      toast.error("Error adding user");
+      toast.error("Error adding location");
     }
   };
 
-  const filterDatabySearch = (userData) => {
-    let filteredData = userData;
+  const filterDatabySearch = (locationData) => {
+    let filteredData = locationData;
   
     if (searchText) {
       const lowerSearchText = searchText.toLowerCase().trim();
-      filteredData = userData.filter((item) =>
+      filteredData = locationData.filter((item) =>
         item.name && item.name.toLowerCase().includes(lowerSearchText)
       );
     }
@@ -187,24 +175,52 @@ export default function DashboardLocations() {
       ) : (
         <>
           {isProfileModalOpen && (
-            <RowUser
-              userData={userData}
-              setUserData={setUserData}
+            <>
+            <RowLocation
+            locationData={locationData}
+              setLocationData={setLocationData}
               isProfileModalOpen={isProfileModalOpen}
               setIsProfileModalOpen={setIsProfileModalOpen}
               closeHandler={() => setIsProfileModalOpen(false)}
             />
+            <div
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  width: "100%",
+                  height: "100%",
+                  backgroundColor: "rgba(0, 0, 0, 0.5)", 
+                  zIndex: 1002,
+                }}
+                onClick={() => setIsProfileModalOpen(false)}
+              ></div>
+            </>
           )}
 
-          {isFormAdd && (
-            <FormAdd
-              closeHandler={() => setIsFormAdd(false)}
+          {isLocationFormAdd && (
+            <>
+            <LocationFormAdd
+              closeHandler={() => setIsLocationFormAdd(false)}
               handleAdd={handleAdd}
               formData={formData}
               setFormData={setFormData}
-              isFormAdd={isFormAdd}
-              setIsFormAdd={setIsFormAdd}
+              isLocationFormAdd={isLocationFormAdd}
+              setIsLocationFormAdd={setIsLocationFormAdd}
             />
+            <div
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  width: "100%",
+                  height: "100%",
+                  backgroundColor: "rgba(0, 0, 0, 0.5)", 
+                  zIndex: 1002,
+                }}
+                onClick={() => setIsLocationFormAdd(false)}
+              ></div>
+            </>
           )}
 
           {isDeleteModalOpen && (
@@ -224,7 +240,6 @@ export default function DashboardLocations() {
               }} className="headerUser"
             >
               <h1 style={{ color: "#314865" }}>Locations</h1>
-              <h1>just to test till locations table done</h1>
 
               <Search searchText={searchText} setSearchText={setSearchText} />
 
@@ -237,7 +252,7 @@ export default function DashboardLocations() {
                   <span style={{ marginRight: "5px", fontWeight: "bold" }}>
                     +{" "}
                   </span>{" "}
-                  Add User
+                  Add Location
                 </Button>
               </ButtonToolbar>
             </div>

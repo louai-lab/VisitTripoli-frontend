@@ -7,7 +7,7 @@ const Textarea = React.forwardRef((props, ref) => (
   <Input {...props} as="textarea" ref={ref} />
 ));
 
-const FormAdd = ({formData , setFormData , handleAdd , closeHandler , isFormAdd , setIsFormAdd }) => {
+const LocationFormAdd = ({formData , setFormData , handleAdd , closeHandler , isLocationFormAdd , setIsLocationFormAdd }) => {
   const [imageFile, setImageFile] = useState(null);
 
   const handleInputChange = (name, value) => {
@@ -51,39 +51,17 @@ const FormAdd = ({formData , setFormData , handleAdd , closeHandler , isFormAdd 
         alignItems: "center",
       }}
     >
-      <h3>Add User</h3>
+      <h3>Add Location</h3>
       <Form>
         <Form.Group controlId="name">
           <Form.ControlLabel>Name</Form.ControlLabel>
           <Form.Control name="name" onChange={(value) => handleInputChange("name", value)} />
-          <Form.HelpText>Username is required</Form.HelpText>
-        </Form.Group>
-        <Form.Group controlId="email">
-          <Form.ControlLabel>Email</Form.ControlLabel>
-          <Form.Control name="email" onChange={(value) => handleInputChange("email", value)} type="email" />
-          <Form.HelpText tooltip>Email is required</Form.HelpText>
-        </Form.Group>
-        <Form.Group controlId="password">
-          <Form.ControlLabel>Password</Form.ControlLabel>
-          <Form.Control name="password" type="password" onChange={(value) => handleInputChange("password", value)} autoComplete="off" />
+          <Form.HelpText>Name is required</Form.HelpText>
         </Form.Group>
 
         <Form.Group controlId="image">
           <Form.ControlLabel>Image</Form.ControlLabel>
           <input type="file" accept="image/*" onChange={handleImageChange} />
-        </Form.Group>
-
-        <Form.Group>
-          <SelectPicker
-            data={[
-              // { value: "guide", label: "Guide" },
-              { value: "admin", label: "Admin" },
-            ]}
-            placeholder="Select Role"
-            name="role"
-            onChange={(value) => handleInputChange("role", value)}
-            menuStyle={{ zIndex: 1005 }}
-          />
         </Form.Group>
 
         <Form.Group>
@@ -105,4 +83,4 @@ const FormAdd = ({formData , setFormData , handleAdd , closeHandler , isFormAdd 
   );
 };
 
-export default FormAdd;
+export default LocationFormAdd;
