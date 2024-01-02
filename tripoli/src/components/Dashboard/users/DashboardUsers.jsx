@@ -45,8 +45,6 @@ export default function DashboardUsers() {
   const [userDataToDelete, setUserDataToDelete] = useState(null);
   const [searchText, setSearchText] = useState("");
 
-  
-
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -157,14 +155,14 @@ export default function DashboardUsers() {
 
   const filterDatabySearch = (userData) => {
     let filteredData = userData;
-  
+
     if (searchText) {
       const lowerSearchText = searchText.toLowerCase().trim();
-      filteredData = userData.filter((item) =>
-        item.name && item.name.toLowerCase().includes(lowerSearchText)
+      filteredData = userData.filter(
+        (item) => item.name && item.name.toLowerCase().includes(lowerSearchText)
       );
     }
-  
+
     return filteredData;
   };
 
@@ -187,16 +185,31 @@ export default function DashboardUsers() {
       ) : (
         <>
           {isProfileModalOpen && (
-            <RowUser
-              userData={userData}
-              setUserData={setUserData}
-              isProfileModalOpen={isProfileModalOpen}
-              setIsProfileModalOpen={setIsProfileModalOpen}
-              closeHandler={() => setIsProfileModalOpen(false)}
-            />
+            <>
+              <RowUser
+                userData={userData}
+                setUserData={setUserData}
+                isProfileModalOpen={isProfileModalOpen}
+                setIsProfileModalOpen={setIsProfileModalOpen}
+                closeHandler={() => setIsProfileModalOpen(false)}
+              />
+              <div
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  width: "100%",
+                  height: "100%",
+                  backgroundColor: "rgba(0, 0, 0, 0.5)", 
+                  zIndex: 1002,
+                }}
+                onClick={() => setIsProfileModalOpen(false)}
+              ></div>
+            </>
           )}
 
           {isFormAdd && (
+            <>
             <FormAdd
               closeHandler={() => setIsFormAdd(false)}
               handleAdd={handleAdd}
@@ -205,6 +218,19 @@ export default function DashboardUsers() {
               isFormAdd={isFormAdd}
               setIsFormAdd={setIsFormAdd}
             />
+            <div
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  width: "100%",
+                  height: "100%",
+                  backgroundColor: "rgba(0, 0, 0, 0.5)", 
+                  zIndex: 1002,
+                }}
+                onClick={() => setIsFormAdd(false)}
+              ></div>
+            </>
           )}
 
           {isDeleteModalOpen && (
@@ -221,7 +247,8 @@ export default function DashboardUsers() {
                 display: "flex",
                 justifyContent: "space-between",
                 margin: "10px",
-              }} className="headerUser"
+              }}
+              className="headerUser"
             >
               <h1 style={{ color: "#314865" }}>Users</h1>
 

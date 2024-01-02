@@ -12,19 +12,16 @@ const getImageUrl = (image) => {
   return `http://localhost:4000/images/${image}`;
 };
 
-const RowUser = ({
+const RowLocation = ({
   closeHandler,
   isProfileModalOpen,
   setIsProfileModalOpen,
-  userData,
-  setUserData,
+  locationData,
+  setLocationData,
 }) => {
   const [formData, setFormData] = useState({
-    name: userData.name || "",
-    email: userData.email || "",
-    // password: "",
-    role: userData.role || "",
-    image: userData.image || "",
+    name: locationData.name || "",
+    image: locationData.image || "",
   });
 
   const handleInputChange = (name, value) => {
@@ -51,18 +48,18 @@ const RowUser = ({
         formDataToSend.append(key, value);
       });
 
-      const response = await axios.patch(
-        `${process.env.REACT_APP_BACKEND}/user/update/${userData.id}`,
+      const response = await axios.put(
+        `${process.env.REACT_APP_BACKEND}/location/update/${locationData.id}`,
         formDataToSend
       );
 
       console.log("Update successful", response.data);
       toast.success("Update succsessfully");
 
-      const updatedUserData = response.data;
+      const updatedLocationData = response.data;
 
       // Update the state to reflect the changes
-      setUserData(updatedUserData);
+      setLocationData(updatedLocationData);
     } catch (error) {
       console.log(error);
       toast.error("Update failed");
@@ -104,52 +101,13 @@ const RowUser = ({
               required={false}
             />
           </Form.Group>
-          <Form.Group controlId="email">
-            <Form.ControlLabel>Email</Form.ControlLabel>
-            <Form.Control
-              name="email"
-              type="email"
-              // value={userData.email}
-              defaultValue={formData.email}
-              onChange={(value) => handleInputChange("email", value)}
-              required={false}
-            />
-            {/* <Form.HelpText tooltip>Email is required</Form.HelpText> */}
-          </Form.Group>
-          {/* <Form.Group controlId="password">
-            <Form.ControlLabel>Password</Form.ControlLabel>
-            <Form.Control
-              name="password"
-              type="password"
-              defaultValue={formData.password}
-              onChange={(value) => handleInputChange("password", value)}
-              autoComplete="off"
-              required={false}
-            />
-          </Form.Group> */}
-
-          <Form.Group>
-            <SelectPicker
-              data={[
-                { value: "guide", label: "Guide" },
-                { value: "admin", label: "Admin" },
-              ]}
-              placeholder="Select Role"
-              name="role"
-              // value={userData.role}
-              defaultValue={formData.role}
-              onChange={(value) => handleInputChange("role", value)}
-              
-              menuStyle={{ zIndex: 1005 }}
-            />
-          </Form.Group>
 
           <Form.Group controlId="image">
             <Form.ControlLabel>Image</Form.ControlLabel>
             <input type="file" accept="image/*" onChange={handleImageChange} />
-            {userData.image && (
+            {locationData.image && (
               <img
-                src={getImageUrl(userData.image)}
+                src={getImageUrl(locationData.image)}
                 alt="User"
                 style={{ maxWidth: "100%", maxHeight: "150px" }}
               />
@@ -176,4 +134,4 @@ const RowUser = ({
   );
 };
 
-export default RowUser;
+export default RowLocation;
