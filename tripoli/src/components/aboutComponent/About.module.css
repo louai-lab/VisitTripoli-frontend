@@ -1,19 +1,19 @@
 .RowDisplay {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  align-items: center;
-  margin-top: 3rem;
-}
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-top: 5rem;
+  }
 
-.RowReverseDisplay {
-  display: flex;
-  flex-direction: row-reverse;
-  justify-content: space-evenly;
-  align-items: center;
-  margin-top: 3rem;
-  margin-bottom: 3rem;
-}
+  .RowReverseDispllay {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+  }
 
 .aboutImage {
   width: 25%;

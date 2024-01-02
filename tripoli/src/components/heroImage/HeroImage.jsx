@@ -3,7 +3,7 @@ import HeroImageCSS from "./HeroImage.module.css";
 import Typed from "typed.js";
 import homeImage from "../heroImage/home.jpg";
 import locationsImage from "../heroImage/locations.jpg";
-import hotelsImage from "../heroImage/hotels.jpeg";
+import hotelsImage from "../../images/de-java-hotel.jpg";
 import toursImage from "../heroImage/tours.jpg";
 
 export default function HeroImage(props) {
@@ -47,7 +47,7 @@ export default function HeroImage(props) {
   const imageCSS = {
     background: `url(${myurl}) no-repeat`,
     backgroundSize: "cover",
-    backgroundPosition: "center",
+    backgroundPosition: "center center",
     width: "100%",
     height: "100vh",
   };

@@ -1,10 +1,6 @@
-:root {
-  --dark: #2b2d42;
-  --light: #abd5bd;
-  --border: #dee2e6;
-  --border-btn: #edf2f4;
+html {
+  scroll-behavior: smooth;
 }
-
 .App {
   text-align: center;
 }

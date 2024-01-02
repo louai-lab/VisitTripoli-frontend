@@ -6,9 +6,10 @@ import UserContext from "./useContext/userContext";
 import { Navigate } from "react-router-dom";
 import Locations from "./pages/locations/Locations";
 import React from "react";
-import NotFound from "./components/Not Found/NotFound";
 import DashboardLocations from "./components/Dashboard/locations/DashboardLocations";
 import DashboardUsers from "./components/Dashboard/users/DashboardUsers";
+import NotFound from "./pages/NotFound/NotFound";
+
 import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import Tour from "./pages/Tour/Tour";
@@ -23,6 +24,9 @@ import SignUp from "./pages/SignUp/SignUp";
 import SignIn from "./pages/SignIn/SignIn";
 import DashboardPages from "./pages/NewDashbaord/NewDashboard";
 import { Test } from "./pages/TestPage/test";
+import { HelmetProvider, Helmet } from 'react-helmet-async';
+import FavIcon from './images/favicon.png'
+import DashboardTours from "./components/Dashboard/tours/DashboardTours";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -84,6 +88,10 @@ function App() {
 
   }, []);
   return (
+  <HelmetProvider>
+    <Helmet>
+      <link rel="shortcut icon" href={FavIcon} type="image/x-icon" />
+    </Helmet>
     <UserContext.Provider value={{ user, setUser }}>
       <Routes>
         <Route path="/signup" element={<SignUp />} />
@@ -116,14 +124,15 @@ function App() {
         <Route path="/admin/tours/update/:id" element={<Update />} />
         <Route path="/admin/tours/add" element={<Add />} />
         <Route path="/*" element={<NotFound />} />
-        <Route path="/dashboard" element={<DashboardPages />}/>
-        <Route path="/dashboard/test" element={<DashboardPages> <Test /> </DashboardPages>}/>
 
+        <Route path="/dashboard" element={<DashboardPages> <DashboardLocations /> </DashboardPages>}/>
         <Route path="/dashboard/locations" element={<DashboardPages> <DashboardLocations /> </DashboardPages>}/>
         <Route path="/dashboard/users" element={<DashboardPages> <DashboardUsers /> </DashboardPages>}/>
+        <Route path="/dashboard/tours" element={<DashboardPages> <DashboardTours /> </DashboardPages>}/>
 
       </Routes>
     </UserContext.Provider>
+    </HelmetProvider>
   );
 }
 
