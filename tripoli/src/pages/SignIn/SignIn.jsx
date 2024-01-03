@@ -9,9 +9,10 @@ import eye from "../../images/eye.png";
 import hide from "../../images/hide.png";
 import { toast, ToastContainer } from "react-toastify";
 import UserContext from "../../useContext/userContext";
+import { UserAuth } from "../../useContext/AuthContext";
 
 function SignIn() {
-  const { user , setUser } = useContext(UserContext)
+  const { user, setUser } = useContext(UserContext);
   const navigate = useNavigate();
   const [imageFile, setImageFile] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
@@ -19,6 +20,18 @@ function SignIn() {
     email: "",
     password: "",
   });
+
+  // const {googleSignIn} = UserAuth()
+
+  // const handleGoogleSignIn = async ()=>{
+  //   try{
+  //     await googleSignIn()
+  //   }
+  //   catch(error){
+  //     console.log(error)
+  //   }
+  // }
+  
 
   const visiblePassword = () => {
     setShowPassword(!showPassword);
@@ -48,16 +61,15 @@ function SignIn() {
 
       if (response.data) {
         // console.log(response.data);
-        setUser(response.data)
+        setUser(response.data);
 
         // Save user data to local storage
         localStorage.setItem("userData", JSON.stringify(true));
-        toast.success("Login successfully")
+        toast.success("Login successfully");
         setTimeout(() => {
           navigate("/home", { replace: true });
         }, 3000);
       }
-      
     } catch (error) {
       // if (error.response.status === 401) {
       //   toast.error("Incorrect email or password");
@@ -67,6 +79,10 @@ function SignIn() {
       console.log(error);
     }
   };
+
+  
+
+
 
   return (
     <>
@@ -121,14 +137,16 @@ function SignIn() {
               </Link>
             </form>
 
-            <div className={style.googleButton}>
-              <img
-                src={googleIcon}
-                alt="Google Icon"
-                className={style.googleIcon}
-              />
-              <p className={style.slogan}>Sign in with Google</p>
-            </div>
+            {/* <button onClick={handleGoogleSignIn} style={{backgroundColor:"transparent"}}> */}
+              <div className={style.googleButton}>
+                <img
+                  src={googleIcon}
+                  alt="Google Icon"
+                  className={style.googleIcon}
+                />
+                <p className={style.slogan}>Sign in with Google</p>
+              </div>
+            {/* </button> */}
             <p className={style.loginP}>
               Don't have an account?
               <span className={style.login}>
