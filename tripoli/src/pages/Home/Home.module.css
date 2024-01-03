@@ -1,19 +1,20 @@
 .heading {
-  margin: 15px auto;
+  margin: 5rem auto 3rem;
   font-size: 3rem;
   width: fit-content;
   color: #314865;
 }
 .link {
   text-decoration: none;
-  padding: 10px;
+  padding: 10px 15px;
   color: white;
   background: #314865;
-  border-radius: 100px;
-  margin: 25px auto 40px;
+  margin: 25px auto 5rem;
   display: flex;
   width: fit-content;
   border: 1px solid #314865;
+  border-radius: 4px;
+  transition: .3s;
 }
 .link:hover {
   background-color: white;

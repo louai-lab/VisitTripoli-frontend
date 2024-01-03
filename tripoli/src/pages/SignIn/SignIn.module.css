@@ -1,0 +1,162 @@
+.main {
+  display: flex;
+  flex-direction: row-reverse;
+  /* gap: 150px; */
+  height: 100vh;
+  justify-content: space-between;
+}
+.imageContainer {
+  width: 50vw;
+  height: 100vh;
+  background-image: url(../../images//tripoliTal.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+}
+.text {
+  margin-bottom: 30px;
+}
+.text .mainTitle {
+  color: black;
+  font-size: 36px;
+  font-weight: 500;
+}
+.text .slogan {
+  color: black;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+}
+form .input {
+  margin-bottom: 25px;
+}
+.input input {
+  padding: 10px 20px 10px 10px;
+  width: 90%;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  outline: 0;
+  font-size: 16px;
+}
+.input input::placeholder {
+  color: black;
+  opacity: 0.4;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  transition: .5s;
+}
+.input input:focus::placeholder {
+  opacity: 0;
+}
+.passwordInput {
+  width: 100%;
+  position: relative;
+}
+.passwordInput img {
+  width: 25px;
+  position: absolute;
+  z-index: 1;
+  left: 90%;
+  top: 50%;
+  transform: translateY(-50%);
+} 
+.picture {
+  display: flex;
+  flex-direction: column;
+}
+.imageLabel {
+  margin-bottom: 10px;
+  opacity: 0.7;
+}
+.uploadImageInput {
+  cursor: pointer;
+}
+.submitBtn {
+  /* width: calc(60% + 20px); */
+  width: 100%;
+  font-size: 16px;
+  display: flex;
+  padding: 16px 150px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  background:#314865;
+  color: white;
+  font-weight: bold;
+  margin-top: 30px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  transition: .5s;
+}
+.submitBtn:hover {
+  background:#26384c;
+}
+.googleButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  /* width: 100%; */
+  padding: 0px 85px;
+  gap: 10px;
+  border: 1px solid #CCC;
+  
+  margin-top: 20px;
+  cursor: pointer;
+}
+.googleIcon {
+  width: 30px;
+}
+.loginP {
+  width: 70%;
+  text-align: center;
+}
+.login {
+  text-decoration: underline;
+  margin-left: 10px;
+}
+@media (max-width: 992px) {
+  .main {
+    /* gap: 80px; */
+  }
+}
+@media (max-width: 768px) {
+  .main {
+    display: block;
+    margin: auto;
+  }
+  .mainTitle {
+    margin-top: 0;
+  }
+  .imageContainer {
+    display: none;
+  }
+  .content {
+    justify-content: center;
+    margin: auto;
+    position: relative;
+    /* left: 20%;
+    top: 50%; */
+    /* transform: translateY(-50%); */
+  }
+  .loginP {
+    margin-bottom: 20px;
+  }
+}
+@media (max-width: 992px) {
+  .text .mainTitle {
+    font-size: 30px;
+  }
+  .content .googleButton {
+    gap: 10px;
+  }
+}
