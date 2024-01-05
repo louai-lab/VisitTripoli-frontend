@@ -23,7 +23,7 @@ export default function OAuth({ signup }) {
                 image: result.user.photoURL
             })
             console.log(res.data)
-            navigate("/");
+            navigate("/home");
             console.log("Worked!")
         } catch (error) {
             console.log("could not sign in with google")
