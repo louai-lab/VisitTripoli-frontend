@@ -1,12 +1,16 @@
+import React , {useContext} from 'react';
 import { GoogleAuthProvider, getAuth, signInWithPopup } from 'firebase/auth';
 import { app } from './firebase.js';
 import style from "./OAuth.module.css"
 import googleIcon from "../images/google.png";
 import axios from 'axios';
+import UserContext from '../useContext/userContext.js';
 
 import { useNavigate } from 'react-router-dom';
 
 export default function OAuth({ signup }) {
+
+  const { user, setUser } = useContext(UserContext);
 
   const navigate = useNavigate();
     const handleGoogleClick = async ()=>{
@@ -22,6 +26,8 @@ export default function OAuth({ signup }) {
                 email: result.user.email, 
                 image: result.user.photoURL
             })
+            setUser(res.data)
+            localStorage.setItem('userData', JSON.stringify(true));
             console.log(res.data)
             navigate("/home");
             console.log("Worked!")
