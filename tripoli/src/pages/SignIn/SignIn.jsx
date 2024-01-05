@@ -1,14 +1,13 @@
 import { React, useContext, useState } from "react";
 import style from "./SignIn.module.css";
-// import style from '../SignUp/SignUp.module.css'
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import googleIcon from "../../images/google.png";
 import eye from "../../images/eye.png";
 import hide from "../../images/hide.png";
 import { toast, ToastContainer } from "react-toastify";
 import UserContext from "../../useContext/userContext";
+import OAuth from "../../OAuth/OAuth";
 
 function SignIn() {
   const { user , setUser } = useContext(UserContext)
@@ -119,16 +118,8 @@ function SignIn() {
                   className={style.submitBtn}
                 />
               </Link>
+              <OAuth signup={false}/>
             </form>
-
-            <div className={style.googleButton}>
-              <img
-                src={googleIcon}
-                alt="Google Icon"
-                className={style.googleIcon}
-              />
-              <p className={style.slogan}>Sign in with Google</p>
-            </div>
             <p className={style.loginP}>
               Don't have an account?
               <span className={style.login}>

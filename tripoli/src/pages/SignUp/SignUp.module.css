@@ -1,6 +1,5 @@
 .main {
   display: flex;
-  /* gap: 150px; */
   height: 100vh;
 }
 
@@ -136,9 +135,6 @@ form .input {
   .submitBtn {
     padding: 0;
   }
-  .content .googleButton {
-    gap: 10px;
-  }
 }
 
 @media (max-width: 880px) {
@@ -152,15 +148,10 @@ form .input {
   .submitBtn {
     width: 90%;
   }
-  .googleButton {
-    width: 90%;
-  }
   .text {
     width: 90%;
   }
 }
-
-
 
 @media (max-width: 768px) {
   .main {
@@ -175,11 +166,7 @@ form .input {
   .content {
     justify-content: center;
     align-items: center;
-    /* margin: 0 auto; */
     position: relative;
-    /* left: 20%;
-    top: 50%; */
-    /* transform: translateY(-50%); */
   }
   .text {
   width: 90%;

@@ -4,10 +4,10 @@ import style from "./SignUp.module.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import googleIcon from "../../images/google.png";
 import eye from "../../images/eye.png";
 import hide from "../../images/hide.png";
 import UserContext from "../../useContext/userContext";
+import OAuth from "../../OAuth/OAuth.js";
 
 import "react-toastify/dist/ReactToastify.css";
 import { Helmet } from "react-helmet-async";
@@ -159,15 +159,8 @@ function SignUp() {
                   className={style.submitBtn}
                 />
               </Link>
+              <OAuth signup={true}/>
             </form>
-            <div className={style.googleButton}>
-              <img
-                src={googleIcon}
-                alt="Google Icon"
-                className={style.googleIcon}
-              />
-              <p className={style.slogan}>Sign up with Google</p>
-            </div>
             <p className={style.signinP}>
               Already have account?
               <span className={style.signin}>
