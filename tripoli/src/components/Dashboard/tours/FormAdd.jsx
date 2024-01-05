@@ -91,17 +91,10 @@ const FormAdd = ({formData , setFormData , handleAdd , closeHandler , isFormAdd 
           <Form.ControlLabel>Price*</Form.ControlLabel>
           <Form.Control name="price" onChange={(value) => handleInputChange("price", value)} />
         </Form.Group>
-
         <Form.Group controlId="image">
           <Form.ControlLabel>Image*</Form.ControlLabel>
           <input type="file" accept="image/*" onChange={handleImageChange} />
         </Form.Group>
-
-        {/* <Form.Group controlId="userId">
-          <Form.ControlLabel>User Id*</Form.ControlLabel>
-          <Form.Control name="userId" onChange={(value) => handleInputChange("userId", value)} />
-        </Form.Group> */}
-
         <Form.Group controlId="userId">
           <SelectPicker
             data={guideUsers}
@@ -111,7 +104,6 @@ const FormAdd = ({formData , setFormData , handleAdd , closeHandler , isFormAdd 
             menuStyle={{ zIndex: 1005 }}
           />
         </Form.Group>
-
         <Form.Group style={{marginBottom: "30px"}}>
           <ButtonToolbar>
             <Button
