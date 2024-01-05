@@ -10,6 +10,27 @@ const Textarea = React.forwardRef((props, ref) => (
 const FormAdd = ({formData , setFormData , handleAdd , closeHandler , isFormAdd , setIsFormAdd }) => {
   const [imageFile, setImageFile] = useState(null);
 
+  const [usersData, setUsersData] = useState([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_BACKEND}/user/`
+        );
+        const allUsers = response.data;
+        console.log(allUsers)
+        setUsersData(allUsers);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, []);
+
+  const guideUsers = usersData
+  .filter(user => user.role === 'guide')
+  .map(user => ({ value: user.id, label: user.id }));
+
   const handleInputChange = (name, value) => {
     setFormData({
       ...formData,
@@ -70,17 +91,19 @@ const FormAdd = ({formData , setFormData , handleAdd , closeHandler , isFormAdd 
           <Form.ControlLabel>Price*</Form.ControlLabel>
           <Form.Control name="price" onChange={(value) => handleInputChange("price", value)} />
         </Form.Group>
-
         <Form.Group controlId="image">
           <Form.ControlLabel>Image*</Form.ControlLabel>
           <input type="file" accept="image/*" onChange={handleImageChange} />
         </Form.Group>
-
         <Form.Group controlId="userId">
-          <Form.ControlLabel>User Id*</Form.ControlLabel>
-          <Form.Control name="userId" onChange={(value) => handleInputChange("userId", value)} />
+          <SelectPicker
+            data={guideUsers}
+            placeholder="Select Guide Id"
+            name="userId"
+            onChange={(value) => handleInputChange("userId", value)}
+            menuStyle={{ zIndex: 1005 }}
+          />
         </Form.Group>
-
         <Form.Group style={{marginBottom: "30px"}}>
           <ButtonToolbar>
             <Button

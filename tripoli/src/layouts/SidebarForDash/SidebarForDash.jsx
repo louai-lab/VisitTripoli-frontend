@@ -47,11 +47,16 @@ function SidebarForDash() {
             <li className={Styles.sidebarListItem}>Users</li>
           </Link>
         </div>
-        <button onClick={handleLogOut} style={{backgroundColor:"transparent"}}>
-          <Link to="/signin">
-            <li className={Styles.sidebarListItem}>Log out</li>
+        <div style={{ display:"flex", flexDirection: "column"}}>
+          <Link to="/dashboard/profile">
+              <li className={Styles.sidebarListItem}>Profile</li>
           </Link>
-        </button>
+          <button onClick={handleLogOut} style={{backgroundColor:"transparent", padding: "0px"}}>
+            <Link to="/signin">
+              <li className={Styles.sidebarListItem}>Log out</li>
+            </Link>
+          </button>
+          </div>
       </ul>
     </aside>
   );
