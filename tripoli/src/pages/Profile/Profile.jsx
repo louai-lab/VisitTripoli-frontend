@@ -20,9 +20,14 @@ const Profile = () => {
     fetchData();
   }, []);
 
-  const imageFileName = data.image;
-  const imageSRC = `${process.env.REACT_APP_BACKEND}/images/${imageFileName}`;
-  
+  let imageSRC = '';
+
+  if (data && data.image) {
+    imageSRC = data.image.startsWith('image')
+      ? `${process.env.REACT_APP_BACKEND}/images/${data.image}`
+      : data.image;
+  }
+
   return (
     <div className={style.main}>
       <div className={style.header}>
