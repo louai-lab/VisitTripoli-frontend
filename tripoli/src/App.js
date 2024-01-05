@@ -23,10 +23,10 @@ import ContainerOfThePage from "./components/ContainerOfThePage/ContainerOfThePa
 import SignUp from "./pages/SignUp/SignUp";
 import SignIn from "./pages/SignIn/SignIn";
 import DashboardPages from "./pages/NewDashbaord/NewDashboard";
-import { Test } from "./pages/TestPage/test";
 import { HelmetProvider, Helmet } from 'react-helmet-async';
 import FavIcon from './images/favicon.png'
 import DashboardTours from "./components/Dashboard/tours/DashboardTours";
+import Profile from "./pages/Profile/Profile";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -129,7 +129,7 @@ function App() {
         <Route path="/dashboard/locations" element={<DashboardPages> <DashboardLocations /> </DashboardPages>}/>
         <Route path="/dashboard/users" element={<DashboardPages> <DashboardUsers /> </DashboardPages>}/>
         <Route path="/dashboard/tours" element={<DashboardPages> <DashboardTours /> </DashboardPages>}/>
-
+        <Route path="/dashboard/profile" element={<DashboardPages> <Profile /> </DashboardPages>}/>
       </Routes>
     </UserContext.Provider>
     </HelmetProvider>
