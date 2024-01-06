@@ -7,7 +7,7 @@ import Car from "../../components/SVGComponents/Car";
 import MapIcon from "../../components/SVGComponents/MapIcon";
 import Star from "../../components/SVGComponents/Star";
 import Money from "../../components/SVGComponents/Money";
-
+import { Helmet } from "react-helmet-async";
 import ImageSlider from "../../components/slider/ImageSlider";
 import { useParams } from "react-router-dom";
 
@@ -64,6 +64,17 @@ export default function Locations(props) {
 
   return (
     <>
+      <Helmet>
+        <title>Visit Tripoli - Explore its Locations</title>
+        <meta
+          name="description"
+          content="Plan your visit to Tripoli, Lebanon, and discover the historic locations , with good guides , and more with Visit Tripoli."
+        />
+        <meta
+          name="keywords"
+          content="Visit Tripoli, Lebanon, travel, guide , tourism, culture, hotel , view , service , history, attractions"
+        />
+      </Helmet>
       <Header></Header>
       <HeroImage
         image={thisLocation.heroImage}

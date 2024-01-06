@@ -7,8 +7,8 @@ import eye from "../../images/eye.png";
 import hide from "../../images/hide.png";
 import { toast, ToastContainer } from "react-toastify";
 import UserContext from "../../useContext/userContext";
-import { UserAuth } from "../../useContext/AuthContext";
 import OAuth from "../../OAuth/OAuth";
+import { Helmet } from "react-helmet-async";
 
 function SignIn() {
   const { user, setUser } = useContext(UserContext);
@@ -19,18 +19,6 @@ function SignIn() {
     email: "",
     password: "",
   });
-
-  // const {googleSignIn} = UserAuth()
-
-  // const handleGoogleSignIn = async ()=>{
-  //   try{
-  //     await googleSignIn()
-  //   }
-  //   catch(error){
-  //     console.log(error)
-  //   }
-  // }
-  
 
   const visiblePassword = () => {
     setShowPassword(!showPassword);
@@ -79,12 +67,20 @@ function SignIn() {
     }
   };
 
-  
-
-
-
   return (
     <>
+      <Helmet>
+        <title>Visit Tripoli - Sign In</title>
+        <meta
+          name="description"
+          content="Sign in to your Visit Tripoli account. Explore tours, hotels, and attractions in Tripoli."
+        />
+        <meta
+          name="keywords"
+          content="Visit Tripoli, sign in, travel, tours, hotels, attractions"
+        />
+      </Helmet>
+
       <ToastContainer />
       <main className={style.main}>
         <div className={style.imageContainer}></div>
@@ -134,7 +130,7 @@ function SignIn() {
                   className={style.submitBtn}
                 />
               </Link>
-              <OAuth signup={false}/>
+              <OAuth signup={false} />
             </form>
             <p className={style.loginP}>
               Don't have an account?

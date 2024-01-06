@@ -72,11 +72,15 @@ export default function DashboardUsers() {
     fetchData();
   }, []);
 
-  // for showing the image
   const getImageUrl = (image) => {
-    // Assuming the base URL is http://localhost:4000/images
-    return `http://localhost:4000/images/${image}`;
+    
+    if (image && image.startsWith("http")) {
+      return image;
+    } else {
+      return `${process.env.REACT_APP_BACKEND}/images/${image}`;
+    }
   };
+  
 
   // Edit a user
   const handleEdit = (rowId) => {

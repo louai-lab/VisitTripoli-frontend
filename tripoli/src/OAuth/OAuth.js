@@ -19,13 +19,14 @@ export default function OAuth({ signup }) {
             const auth = getAuth(app)
 
             const result = await signInWithPopup(auth,provider)
-            console.log(result);
-            const res = await axios.post('http://localhost:4000/loginWithGoogle', {
+            
+            const res = await axios.post(`${process.env.REACT_APP_BACKEND}/loginWithGoogle`, {
                 name: result.user.displayName,
                 role: "guide",
                 email: result.user.email, 
                 image: result.user.photoURL
             })
+            console.log(result);
             setUser(res.data)
             localStorage.setItem('userData', JSON.stringify(true));
             console.log(res.data)

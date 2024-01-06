@@ -13,24 +13,22 @@ export default function Header() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Check the user's login status when the component mounts
-    // You may need to implement a function to check the user's login status
+  
     const checkLoginStatus = async () => {
       try {
-        // Make a request to your server to check if the user is logged in
+        
         const response = await axios.get(
           `${process.env.REACT_APP_BACKEND}/check-login-status`
         );
 
         if (response.status === 200) {
-          // User is logged in
+          
           setIsLoggedIn(true);
         } else {
-          // User is not logged in
+          
           setIsLoggedIn(false);
         }
       } catch (error) {
-        // Handle any errors that may occur during the request
         console.error("Error checking login status:", error);
       }
     };
